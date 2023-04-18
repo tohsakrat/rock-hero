@@ -1,0 +1,75 @@
+[{
+		"delay":1,
+		"speed": 1,
+		"content": "",
+		"charactor": "video",
+		"action": "",
+		"type": "video",
+		"anim": "",
+		"autoPlay":true
+	}, {
+		"delay":0,
+		"speed": 5,
+		"content": "",
+		"charactor": "video",
+		"action": "",
+		"type": "video",
+		"anim": "fadeOut",
+		"autoPlay":true
+	}, {
+		"delay": 0.0,
+		"speed": 10,
+		"content": "",
+		"charactor": "box",
+		"action": "",
+		"type": "info",
+		"anim": "fadeIn",
+		"autoPlay":true
+	}, {
+		"delay": 0.0,
+		"speed": 2,
+		"content": "我超，原！",
+		"charactor": "mom",
+		"action": "",
+		"type": "info",
+		"anim": "fadeInRight",
+		"autoPlay":false
+	}, {
+		"delay": 0.0,
+		"speed": 10,
+		"content": "这么早就装睡偷偷玩原神，垃圾不收屋子不理，你不如给我去再好好学习上次期末分这么低你好意思*（&（&%……&￥……#&",
+		"charactor": "mom",
+		"action": "",
+		"type": "perform",
+		"anim": "",
+		"autoPlay":false
+	}, {
+		"delay": 0.0,
+		"speed": 2,
+		"content": "我，我知道错了！",
+		"charactor": "boy",
+		"action": "",
+		"type": "info",
+		"anim": "fadeIn",
+		"autoPlay":false
+	},{
+		"delay": 0.0,
+		"speed": 1,
+		"content": "",
+		"charactor": "mom",
+		"action": "",
+		"type": "perform",
+		"anim": "fadeOut",
+		"autoPlay":false
+	}, {
+		"delay": 0.5,
+		"speed": 2,
+		"content": "",
+		"charactor": "boy",
+		"action": "",
+		"type": "info",
+		"anim": "fadeOut",
+		"autoPlay":true
+	}
+
+]
