@@ -151,6 +151,8 @@ public class Hero : MonoBehaviour
 	----------------------------*/
 	public void Shoot ()
 	{
+		//打印
+		Debug.Log("主角射击");
 		//每次触发，随机tigger一个skill中的技能
 		Skills[Random.Range(0,Skills.Count)].trigger();
 
