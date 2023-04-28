@@ -5,25 +5,80 @@ using UnityEngine;
 public class Hero : MonoBehaviour 
 {	
 	public int health;//生命值
+
 	//Prefabs
 	public GameObject deathParticleEffect;
+
 	//Components
 	public SpriteRenderer sr;//贴图
+
+	//主角状态，用于初始化主角的各种状态，只是为了在unity编辑器中调试。如果要引用主角的实时状态，用Hero.r.BaseStatus.moveSpeed这种形式
 	public float moveSpeed;//移动速度
-	public float bulletSpeed;//子弹速度
-	
 	public float attack;//攻击力
-	public float bulletSpread = 1.0f;
+	public float BeatsPerMinute;//每分钟拍数
+	public float attackRate;//攻击速度，每拍打几下
+	public float bulletSpeed;//子弹速度
+	public float bulletSpread = 1.0f;//子弹散布度	
+	public float maxHealth=10f;//生命上限
+
+	//控制变量
+	
+	public static Hero r;
 	public bool canMove;
 	public bool canHoldFire; //是否可以射击
    	public float timer = 0;//计时器
-	public static List<Skill> Skills= new List<Skill>();//技能列表
+	public  List<Skill> Skills= new List<Skill>();//技能列表
+	public  List<Pickup> items= new List<Pickup>();//道具列表
 	
-	public static Hero r;
-	//Prefabs
-	//public GameObject Camera;
+
+	//待重构，这个数据不应该放在这里，鼠标位置
 	public GameObject mousePositionWorld;
+
+	public class status //主角状态类，用于存储主角的各种状态，比如移动速度，攻击力等等
+	{	
+		public float moveSpeed;//移动速度
+		public float attack;//攻击力
+		public float BeatsPerMinute;//每分钟拍数
+		public float attackRate;//攻击速度，每拍打几下
+		public float bulletSpeed;//子弹速度
+		public float bulletSpread ;//子弹散布度
+		public float maxHealth;//生命上限
+
+		public  status(float moveSpeed,float attack,float BeatsPerMinute,float attackRate,float bulletSpeed,float bulletSpread,float maxHealth){
+			this.moveSpeed=moveSpeed;
+			this.attack=attack;
+			this.BeatsPerMinute=BeatsPerMinute;
+			this.attackRate=attackRate;
+			this.bulletSpeed=bulletSpeed;
+			this.bulletSpread=bulletSpread;
+			this.maxHealth=maxHealth;
+		}
+		
+		//状态加法运算符重载
+		
+		public static Hero.status operator+ (Hero.status b, Hero.status c)
+		{
+			return new Hero.status(
+				b.moveSpeed+c.moveSpeed,
+				b.attack+c.attack,
+				b.BeatsPerMinute+c.BeatsPerMinute,
+				b.attackRate+c.attackRate,
+				b.bulletSpeed+c.bulletSpeed,
+				b.bulletSpread+c.bulletSpread,
+				b.maxHealth+c.maxHealth
+			);
+		}
+
+
+	}
+
+	public status BaseStatus;//基础状态
+	public status BuffStatus;//Buff状态
+
 	void Start () { 
+
+		//初始化状态
+		BaseStatus=new status(moveSpeed,attack,BeatsPerMinute,attackRate,bulletSpeed,bulletSpread,maxHealth);
 		r = this; 
 		//技能列表，现在只是把技能注册表里的所有技能都加进来了
 		//取SkillDic中每个值，加入到Skills列表中
@@ -37,6 +92,7 @@ public class Hero : MonoBehaviour
 		{
 			Debug.Log(s.name);
 		}
+
 	}
 
 	void Update ()
@@ -44,7 +100,7 @@ public class Hero : MonoBehaviour
 
 
 		if(Game.g.gameActive){
-		
+
 		transform.position= new Vector3(transform.position.x,transform.position.y,0);
 
 		if(canMove){
@@ -56,7 +112,7 @@ public class Hero : MonoBehaviour
 		if(canHoldFire){
 		
 		if(
-			timer>60f/Game.g.BeatsPerMinute/Game.g.attackRate//每拍打几下
+			timer>60f/BeatsPerMinute/attackRate//每拍打几下
 			){
 				
 			timer=0;
@@ -121,9 +177,8 @@ public class Hero : MonoBehaviour
 			Game.g.SpriteFlash(sr);
 			UI.ui.SetPlanetHealthBarValue(health);
 		}
-	//EFFECTS
-
-	//Allows the player to hold down the fire button.
+	
+	//阻塞射击
 	public void ActivateSpeedFire () { if(!canHoldFire) StartCoroutine(SpeedFireTimer()); }
 
 	IEnumerator SpeedFireTimer ()
@@ -133,5 +188,6 @@ public class Hero : MonoBehaviour
 		canHoldFire = false;
 	}
 
-
 }
+
+

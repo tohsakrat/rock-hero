@@ -1459,6 +1459,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 637073462}
+  - component: {fileID: 637073463}
   m_Layer: 0
   m_Name: "Bag(\u80CC\u5305)"
   m_TagString: Untagged
@@ -1482,6 +1483,18 @@ Transform:
   m_Father: {fileID: 873245349}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &637073463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637073461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f498207033b7c2345a8e08be2af3bbc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &637221771
 GameObject:
   m_ObjectHideFlags: 0
