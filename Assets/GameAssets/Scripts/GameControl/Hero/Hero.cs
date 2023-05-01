@@ -8,9 +8,12 @@ public class Hero : MonoBehaviour
 
 	//Prefabs
 	public GameObject deathParticleEffect;
+	public GameObject healParticleEffect;
 
 	//Components
-	public SpriteRenderer sr;//贴图
+	public SpriteRenderer sr;//贴图 
+	public  Material mat;//主角材质
+	public Vector4 flashColor;//闪烁颜色
 
 	//主角状态，用于初始化主角的各种状态，只是为了在unity编辑器中调试。如果要引用主角的实时状态，用Hero.r.BaseStatus.moveSpeed这种形式
 	public float moveSpeed;//移动速度
@@ -104,7 +107,9 @@ public class Hero : MonoBehaviour
 		transform.position= new Vector3(transform.position.x,transform.position.y,0);
 
 		if(canMove){
-			RotateHero();
+			//摇滚英雄不是飞机，不用掉头
+			//RotateHero();
+
 			movHero();
 		}
 
@@ -150,11 +155,14 @@ public class Hero : MonoBehaviour
 			播放技能
 	----------------------------*/
 	public void Shoot ()
-	{
+	{	
+		//flashSr();
 		//打印
-		Debug.Log("主角射击");
+		//Debug.Log("主角射击");
 		//每次触发，随机tigger一个skill中的技能
-		Skills[Random.Range(0,Skills.Count)].trigger();
+		Skill s=Skills[Random.Range(0,Skills.Count)];
+		Debug.Log(s);
+		s.trigger();
 
 	}
 
@@ -176,9 +184,14 @@ public class Hero : MonoBehaviour
 				health -= dmg;
 
 			CameraController.c.Shake(0.3f, 0.5f, 50.0f);
-			Game.g.SpriteFlash(sr);
+
+			//Game.g.SpriteFlash(sr);
+
 			UI.ui.SetPlanetHealthBarValue(health);
 		}
+	
+
+
 	
 	//阻塞射击
 	public void ActivateSpeedFire () { if(!canHoldFire) StartCoroutine(SpeedFireTimer()); }
@@ -188,6 +201,45 @@ public class Hero : MonoBehaviour
 		canHoldFire = true;
 		yield return new WaitForSeconds(5.0f);
 		canHoldFire = false;
+	}
+		/*--------------------------
+			各种动画
+	----------------------------*/
+	
+	//治疗
+	public void healAnimate ()
+	{
+		GameObject pe = Instantiate(healParticleEffect, transform.position, Quaternion.identity,Hero.r.transform);
+		Destroy(pe, 2.0f);
+		//一秒钟后执行flashSr
+		Invoke("flashSr",0.5f);
+		flashColor=new Vector4(1.1f,2f,1.1f,1.1f);
+
+	}
+
+	//捡起
+
+
+	public void flashSr(){
+		
+		//定义一个全1的vector4
+		Vector4 v=new Vector4(1f,1f,1f,1f);
+		Vector4 v1 = flashColor;
+		//Debug.Log(mat.GetVector("_brightness"));
+		//获取用户定义的shader input要加上下划线
+
+		//如果当前亮度是全1的vector4，就设置为全1.5的vector4，否则设置为全1的vector4
+		if(mat.GetVector("_brightness")==v){
+			mat.SetVector("_brightness",v1);
+			Invoke("flashSr",0.2f);//一秒钟后执行flashSr,把调高的亮度调回来
+		}else{
+			mat.SetVector("_brightness",v);
+		}
+
+
+
+
+
 	}
 
 }

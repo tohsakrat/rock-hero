@@ -250,7 +250,7 @@ MonoBehaviour:
   damage: 0
   hitParticleEffect: {fileID: 1706759898638172, guid: a967b8c0d425dbf4db298df7943a4533,
     type: 3}
-  bulletSpeed: 100
+  bulletSpeed: 50
   lifeTime: 5
   Target: {fileID: 0}
 --- !u!114 &818124990523770775

@@ -6,11 +6,16 @@ public class playItselfGif : MonoBehaviour
 {
     // Start is called before the first frame update
     public string gifUrlInput;
+
+    private SpriteRenderer m_spriteRenderer;
     private bool m_mutex;
     private RawImage m_rawImage;
     private UniGifImage gifImage;
+
+
     void Start()
-    {
+    {   m_spriteRenderer=GetComponent<SpriteRenderer>();
+       Destroy ( m_spriteRenderer);
         m_rawImage=GetComponent<UniGifImage>().m_rawImage;
         gifImage=GetComponent<UniGifImage>();
         if (m_mutex || gifImage == null || string.IsNullOrEmpty(gifUrlInput))

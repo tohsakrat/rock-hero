@@ -18,6 +18,7 @@ public class Regedit : MonoBehaviour
     public string SkillDir;//技能脚本文件存放目录
     public Transform EnemiesParent;//敌人父节点
     public Transform  ModelLayer;//模型层
+    public Transform  ViewLayer;//视图层
 
     public Transform BulletLayer;//子弹层
     public Transform PickupLayer;//补给层
