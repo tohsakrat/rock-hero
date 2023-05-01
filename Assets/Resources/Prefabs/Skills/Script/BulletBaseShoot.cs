@@ -5,11 +5,10 @@ using UnityEngine;
 public class BulletBaseShoot : Bullet
 {
 	public Transform Target;//目标
-
 	public void Awake(){
 		//找到最近的敌人，为自己施加初速度
-		Debug.Log("打印敌人注册表长度");
-		Debug.Log(Regedit.Enemies.Count);
+		//Debug.Log("打印敌人注册表长度");
+		//Debug.Log(Regedit.Enemies.Count);
 		if(Regedit.Enemies.Count>0){
 		int MinDis=0;
 		for(int i =0;i<Regedit.Enemies.Count;i++){
@@ -28,12 +27,12 @@ public class BulletBaseShoot : Bullet
 	}
 	override public void moveRule(){
 
-		bulletSpeed -= Time.deltaTime/lifeTime*bulletSpeed;//子弹速度随时间减小
 		//打印敌人注册表长度
 		
 		
 		transform.position = 
-		Vector3.MoveTowards(transform.position, Target.position, bulletSpeed * Time.deltaTime);//子弹按照最初的方向运动
+
+		Vector3.MoveTowards(transform.position, Target.position, Time.deltaTime*bulletSpeed);//子弹按照最初的方向运动
 		//
 
 		}

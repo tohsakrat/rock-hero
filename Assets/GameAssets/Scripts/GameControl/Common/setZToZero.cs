@@ -12,7 +12,7 @@ public class setZToZero : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   Debug.Log(rectTransform.position);
+    {   //Debug.Log(rectTransform.position);
         rectTransform.position= new Vector3(rectTransform.position.x,rectTransform.position.y,0);
     }
 }

@@ -252,6 +252,7 @@ MonoBehaviour:
     type: 3}
   bulletSpeed: 25
   lifeTime: 1
+  baseSpeed: {x: 1, y: 0, z: 0}
 --- !u!114 &-213155961782918643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,3 +270,4 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1470232904424208}
   bulletSpeed: 0
   icon: {fileID: 0}
+  baseSpeed: {x: 10, y: 0, z: 0}

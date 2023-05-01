@@ -46,10 +46,11 @@ public class Enemy : MonoBehaviour
 	virtual public void moveRule(){
 		//移动规则，每个敌人都有自己的移动规则,可以对这个方法进行拓展
 		transform.position = Vector3.MoveTowards(transform.position, Hero.r.transform.position, moveSpeed * Time.deltaTime);//移动到玩家的位置	
-		LookAtHero();//始终面向玩家
+		//LookAtHero();//始终面向玩家
+		 LookAtHeroLR ();
 	}
 
-	virtual public void LookAtHero ()
+	virtual public void LookAtHeroAngle ()
 	{	//使敌人始终面向玩家。
 		Vector3 dir = transform.position.normalized;
 		float ang = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
@@ -57,6 +58,19 @@ public class Enemy : MonoBehaviour
 		transform.eulerAngles = new Vector3(0, 0, ang);
 	}
 
+	virtual public void LookAtHeroLR ()
+	{	
+		
+		//当敌人在玩家左侧，水平翻转当前组件，否则不翻转
+		if(transform.position.x < Hero.r.transform.position.x && transform.localScale.x > 0)transform.localScale = 
+		new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+		
+		if(transform.position.x > Hero.r.transform.position.x && transform.localScale.x < 0)transform.localScale = 
+		new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+		
+
+		
+	}
 	
 	virtual public void TakeDamage (int dmg)
 	{

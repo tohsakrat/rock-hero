@@ -109,8 +109,9 @@ MonoBehaviour:
   stunned: 0
   deathParticleEffect: {fileID: 1039865511874772, guid: 9d838c99f2af4294c9a60baeecacc759,
     type: 3}
-  duplicatePrefab: {fileID: 0}
   sr: {fileID: 212952748079632708}
+  dis: 0
+  dropRate: 0.5
 --- !u!58 &58240136130071084
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -167,8 +168,9 @@ MonoBehaviour:
   stunned: 0
   deathParticleEffect: {fileID: 1039865511874772, guid: 9d838c99f2af4294c9a60baeecacc759,
     type: 3}
-  duplicatePrefab: {fileID: 0}
   sr: {fileID: 212952748079632708}
+  dis: 0
+  dropRate: 0.5
 --- !u!1 &1639882506122404
 GameObject:
   m_ObjectHideFlags: 0
