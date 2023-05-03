@@ -6,6 +6,11 @@ using UnityEngine.UI;
 public class UI : MonoBehaviour 
 {
 	public GameObject menuUI;
+	public GameObject settingUI;
+	public GameObject DisplaySettingUI;
+	public GameObject SoundSettingUI;
+	public GameObject ControlSettingUI;
+	public GameObject CreditsUI;
 	public GameObject gameUI;
 	public GameObject gameOverUI;
 	public Game gameCtrl;
@@ -55,6 +60,56 @@ public class UI : MonoBehaviour
 	public void OnQuitButton ()
 	{
 		Application.Quit();
+	}
+
+	//点击设置菜单按钮
+	public void OnSettingButton()
+	{
+		menuUI.SetActive(false);
+		settingUI.SetActive(true);
+		DisplaySettingUI.SetActive(true);
+	}
+
+	//点击返回主菜单
+	public void ReturnMainMenu()
+	{
+		menuUI.SetActive(true);
+		settingUI.SetActive(false);
+		CreditsUI.SetActive(false);
+	}
+
+	//点击制作人名单
+	public void OnCreditsButton()
+	{
+		menuUI.SetActive(false);
+		CreditsUI.SetActive(true);
+	}
+
+	//点击画面设置
+	public void OnDisplaySettingButton()
+	{
+		DisplaySettingUI.SetActive(true);
+		SoundSettingUI.SetActive(false);
+		ControlSettingUI.SetActive(false);
+		settingUI.SetActive(true);
+	}
+
+	//点击声音设置
+	public void OnSoundSettingButton()
+	{
+		DisplaySettingUI.SetActive(false);
+		SoundSettingUI.SetActive(true);
+		ControlSettingUI.SetActive(false);
+		settingUI.SetActive(true);
+	}
+
+	//点击控制设置
+	public void OnControlSettingButton()
+	{
+		DisplaySettingUI.SetActive(false);
+		SoundSettingUI.SetActive(false);
+		ControlSettingUI.SetActive(true);
+		settingUI.SetActive(true);
 	}
 
 	//On the game over screen, when the "Menu" button gets pressed.

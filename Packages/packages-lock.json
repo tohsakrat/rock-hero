@@ -1,5 +1,18 @@
 {
   "dependencies": {
+<<<<<<< HEAD
+<<<<<<< HEAD
+    "com.unity.collab-proxy": {
+      "version": "2.0.0",
+      "depth": 0,
+=======
+    "com.unity.burst": {
+      "version": "1.6.5",
+      "depth": 1,
+>>>>>>> c67b2f8ddfdbf65fdb837c48b8d0460053069779
+      "source": "registry",
+      "dependencies": {},
+=======
     "com.unity.burst": {
       "version": "1.6.5",
       "depth": 1,
@@ -7,6 +20,14 @@
       "dependencies": {
         "com.unity.mathematics": "1.2.1"
       },
+>>>>>>> c67b2f8ddfdbf65fdb837c48b8d0460053069779
+      "url": "https://packages.unity.cn"
+    },
+    "com.unity.collab-proxy": {
+      "version": "2.0.4",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
       "url": "https://packages.unity.cn"
     },
     "com.unity.collab-proxy": {
@@ -24,7 +45,7 @@
       "url": "https://packages.unity.cn"
     },
     "com.unity.ide.rider": {
-      "version": "3.0.14",
+      "version": "3.0.18",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -33,7 +54,15 @@
       "url": "https://packages.unity.cn"
     },
     "com.unity.ide.visualstudio": {
+<<<<<<< HEAD
+<<<<<<< HEAD
+      "version": "2.0.17",
+=======
       "version": "2.0.18",
+>>>>>>> c67b2f8ddfdbf65fdb837c48b8d0460053069779
+=======
+      "version": "2.0.18",
+>>>>>>> c67b2f8ddfdbf65fdb837c48b8d0460053069779
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -62,6 +91,11 @@
       "dependencies": {},
       "url": "https://packages.unity.cn"
     },
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> c67b2f8ddfdbf65fdb837c48b8d0460053069779
     "com.unity.render-pipelines.core": {
       "version": "12.1.7",
       "depth": 1,
@@ -99,6 +133,10 @@
         "com.unity.searcher": "4.9.1"
       }
     },
+<<<<<<< HEAD
+>>>>>>> c67b2f8ddfdbf65fdb837c48b8d0460053069779
+=======
+>>>>>>> c67b2f8ddfdbf65fdb837c48b8d0460053069779
     "com.unity.test-framework": {
       "version": "1.1.31",
       "depth": 0,
@@ -141,7 +179,7 @@
       }
     },
     "com.unity.visualscripting": {
-      "version": "1.7.8",
+      "version": "1.8.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {
