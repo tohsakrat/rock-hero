@@ -271,7 +271,7 @@ MonoBehaviour:
     type: 3}
   bulletSpeed: 10
   lifeTime: 1
-  length: 5
+  length: 10
   baseSize: 0.3333
   heroSize: 1
   spriteRenderer: {fileID: 2681260458817054830}

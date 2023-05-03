@@ -19,7 +19,7 @@ TagManager:
   - BG
   - Water
   - UI
-  - 
+  - Bullet
   - 
   - 
   - 
@@ -52,9 +52,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Bullet
-    uniqueID: 346230341
-    locked: 0
   - name: Planet
     uniqueID: 331660915
     locked: 0
@@ -66,6 +63,12 @@ TagManager:
     locked: 0
   - name: nebula
     uniqueID: 1166164461
+    locked: 0
+  - name: Bullet
+    uniqueID: 346230341
+    locked: 0
+  - name: ParticleEffect
+    uniqueID: 3372225511
     locked: 0
   - name: UI
     uniqueID: 841021443

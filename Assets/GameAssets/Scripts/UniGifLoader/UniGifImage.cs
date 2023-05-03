@@ -32,6 +32,9 @@ public class UniGifImage : MonoBehaviour
         Pause,
     }
 
+    //修改原包，读取指定地址
+    public string gifResourcePath;
+
     // Target row image
     [SerializeField]
     public RawImage m_rawImage;
@@ -45,24 +48,30 @@ public class UniGifImage : MonoBehaviour
     [SerializeField]
     private TextureWrapMode m_wrapMode = TextureWrapMode.Clamp;
     // Load from url on start
-    [SerializeField]
+    
+    [HideInInspector]
     private bool m_loadOnStart;
     // GIF image url (WEB or StreamingAssets path)
-    [SerializeField]
+    
+    [HideInInspector]
     private string m_loadOnStartUrl;
     // Rotating on loading
-    [SerializeField]
-    private bool m_rotateOnLoading;
+    
+    [HideInInspector]
+    private bool m_rotateOnLoading=false;
     // Debug log flag
     [SerializeField]
     private bool m_outputDebugLog;
-
+    public string path;//不用设置，纯粹为了调试好看
     // Decoded GIF texture list
     private List<UniGif.GifTexture> m_gifTextureList;
     // Delay time
     private float m_delayTime;
     // Texture index
-    private int m_gifTextureIndex;
+
+    [SerializeField]
+    public int m_gifTextureIndex;
+    
     // loop counter
     private int m_nowLoopCount;
 
@@ -108,9 +117,11 @@ public class UniGifImage : MonoBehaviour
         {
             m_rawImage = GetComponent<RawImage>();
         }
+
         if (m_loadOnStart)
         {
             SetGifFromUrl(m_loadOnStartUrl);
+
         }
     }
 
@@ -204,7 +215,7 @@ public class UniGifImage : MonoBehaviour
         }
         nowState = State.Loading;
 
-        string path;
+        
         if (url.StartsWith("http"))
         {
             // from WEB
@@ -213,11 +224,16 @@ public class UniGifImage : MonoBehaviour
         else
         {
             // from StreamingAssets
-            path = Path.Combine("file:///" + Application.streamingAssetsPath, url);
+            //path = Path.Combine("file:///" + Application.streamingAssetsPath, url);
+            
+            path=Path.Combine(Application.dataPath+gifResourcePath,url);
+            //Debug.Log(Application.dataPath+"Resource/Images");
         }
 
         // Load file
         UnityWebRequest request = UnityWebRequest.Get(path);//new UnityWebRequest(path, UnityWebRequest.kHttpVerbGET);
+
+        //Resources.Load(path) as UnityWebRequest;
         request.SendWebRequest();
         while (!request.isDone)
         {
@@ -235,7 +251,8 @@ public class UniGifImage : MonoBehaviour
         nowState = State.Loading;
 
         // Get GIF textures
-        yield return StartCoroutine(UniGif.GetTextureListCoroutine(request.downloadHandler.data, (gifTexList, loopCount, width, height) =>
+        yield return StartCoroutine(
+        UniGif.GetTextureListCoroutine(request.downloadHandler.data, (gifTexList, loopCount, width, height) =>
         {
             request.Dispose();
             if (gifTexList != null)

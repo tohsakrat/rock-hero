@@ -26,17 +26,17 @@ public class Sweep : Skill
 
     private void Even(){
 
-        GameObject bullet1 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.blt);
+        GameObject bullet1 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.r.BulletLayer);
         
         bullet1.GetComponent<BulletSweep>().setSpeed(v*bulletSpeed);
         bullet1.SetActive(true);
-        GameObject bullet2 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.blt);
+        GameObject bullet2 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.r.BulletLayer);
         bullet2.GetComponent<BulletSweep>().setSpeed(RotateRound(v*bulletSpeed,90));
         bullet2.SetActive(true);
-        GameObject bullet3 = Instantiate(bulletPrefab,Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.blt);
+        GameObject bullet3 = Instantiate(bulletPrefab,Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.r.BulletLayer);
         bullet3.GetComponent<BulletSweep>().setSpeed(RotateRound(v*bulletSpeed,180));
         bullet3.SetActive(true);
-        GameObject bullet4 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.blt);
+        GameObject bullet4 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.r.BulletLayer);
         bullet4.GetComponent<BulletSweep>().setSpeed(RotateRound(v*bulletSpeed,270));
         bullet4.SetActive(true);
 
@@ -44,16 +44,16 @@ public class Sweep : Skill
 
      private void Odd(){
 
-        GameObject bullet1 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.blt);
+        GameObject bullet1 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.r.BulletLayer);
         bullet1.GetComponent<BulletSweep>().setSpeed(RotateRound(v*bulletSpeed,45));
         bullet1.SetActive(true);
-        GameObject bullet2 = Instantiate(bulletPrefab,Hero.r.transform.position, new Quaternion(0,0,0,0),Regedit.blt);
+        GameObject bullet2 = Instantiate(bulletPrefab,Hero.r.transform.position, new Quaternion(0,0,0,0),Regedit.r.BulletLayer);
         bullet2.GetComponent<BulletSweep>().setSpeed(RotateRound(v*bulletSpeed,135));
         bullet2.SetActive(true);
-        GameObject bullet3 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.blt);
+        GameObject bullet3 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.r.BulletLayer);
         bullet3.GetComponent<BulletSweep>().setSpeed(RotateRound(v*bulletSpeed,225));
         bullet3.SetActive(true);
-        GameObject bullet4 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0), Regedit.blt);
+        GameObject bullet4 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0), Regedit.r.BulletLayer);
         bullet4.GetComponent<BulletSweep>().setSpeed(RotateRound(v*bulletSpeed,315));
         bullet4.SetActive(true);
     }

@@ -10,7 +10,6 @@ public class EnemySpawner : MonoBehaviour
 	public float timeBetweenEnemySpawn;
 	private float spawnTimer;
 
-	public GameObject enemyParent;
 
 	void Start ()
 	{
@@ -46,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
 			spawnPos = new Vector3(Random.Range(spawnBoundry.xMin, spawnBoundry.xMax), spawnBoundry.yMin, 0);
 
 		//Spawn the enemy.
-		GameObject enemy = Instantiate(GetRandomEnemy(), spawnPos, Quaternion.identity, enemyParent.transform);
+		GameObject enemy = Instantiate(GetRandomEnemy(), spawnPos, Quaternion.identity, Regedit.r.EnemiesParent.transform);
 		enemy.SetActive(true);
 	}
 
@@ -55,9 +54,9 @@ public class EnemySpawner : MonoBehaviour
 	{
 
 		//在全局敌人字典 Regedit.EnemyDic<string,GameObject>中随机抽取一个元素
-		int randomIndex = Random.Range(0, Regedit.EnemyDic.Count);
+		int randomIndex = Random.Range(0, Regedit.r.EnemyDic.Count);
 		int i = 0;
-		foreach (KeyValuePair<string, GameObject> enemy in Regedit.EnemyDic)
+		foreach (KeyValuePair<string, GameObject> enemy in Regedit.r.EnemyDic)
 		{
 			if (i == randomIndex)
 			{

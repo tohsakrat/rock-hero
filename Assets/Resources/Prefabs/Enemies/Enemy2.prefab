@@ -105,13 +105,17 @@ MonoBehaviour:
   name: 
   health: 10
   moveSpeed: 1.2
+  angleSpeed: 10
   damage: 2
-  stunned: 0
+  lockAngle: 0
+  canFocus: 0
+  dropRate: 0.5
   deathParticleEffect: {fileID: 1039865511874772, guid: 9d838c99f2af4294c9a60baeecacc759,
     type: 3}
-  sr: {fileID: 212952748079632708}
+  bodyTexture: {fileID: 0}
+  angleOffset: 0
+  stunned: 0
   dis: 0
-  dropRate: 0.5
 --- !u!58 &58240136130071084
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -145,9 +149,9 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &-5148185041871775677
 MonoBehaviour:
@@ -164,13 +168,17 @@ MonoBehaviour:
   name: 
   health: 10
   moveSpeed: 1.2
+  angleSpeed: 10
   damage: 2
-  stunned: 0
+  lockAngle: 0
+  canFocus: 0
+  dropRate: 0.5
   deathParticleEffect: {fileID: 1039865511874772, guid: 9d838c99f2af4294c9a60baeecacc759,
     type: 3}
-  sr: {fileID: 212952748079632708}
+  bodyTexture: {fileID: 0}
+  angleOffset: 0
+  stunned: 0
   dis: 0
-  dropRate: 0.5
 --- !u!1 &1639882506122404
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +285,7 @@ EdgeCollider2D:
   - {x: -0.41403013, y: 0.91544497}
   - {x: 0.0021380782, y: 1.005331}
   - {x: 0.37766647, y: 0.93393564}
+  - {x: 0.6669896, y: 0.77433205}
   - {x: 0.7133828, y: 0.7042589}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}

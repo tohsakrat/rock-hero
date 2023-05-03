@@ -120,11 +120,13 @@ public static partial class UniGif
         {
             // Set background color from color table
             byte[] bgRgb = colorTable[gifData.m_bgColorIndex];
-            bgColor = new Color32(bgRgb[0], bgRgb[1], bgRgb[2], (byte)(transparentIndex == gifData.m_bgColorIndex ? 0 : 255));
+            bgColor = new Color32(bgRgb[0], bgRgb[1], bgRgb[2], (byte)(  gifData.m_bgColorIndex==0||gifData.m_bgColorIndex==255 ? 0 : 255));
+            //Debug.Log(gifData.m_bgColorIndex);
+           //Debug.Log(transparentIndex); 
         }
         else
         {
-            bgColor = Color.black;
+            bgColor = Color.clear;
         }
 
         return colorTable;

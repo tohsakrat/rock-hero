@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletBaseShoot : Bullet
 {
-	public Transform Target;//目标
+	public Vector3 Target;//目标
 	public void Awake(){
 		//找到最近的敌人，为自己施加初速度
 		//Debug.Log("打印敌人注册表长度");
@@ -21,7 +21,7 @@ public class BulletBaseShoot : Bullet
 				if(Regedit.Enemies[i].dis<Regedit.Enemies[MinDis].dis)MinDis=i;
 				}
 		}
-		Target = Regedit.Enemies[MinDis].gameObject.transform;//找到最近的敌人
+		Target = Regedit.Enemies[MinDis].gameObject.transform.position;//找到最近的敌人
 
 		}
 	}
@@ -32,7 +32,7 @@ public class BulletBaseShoot : Bullet
 		
 		transform.position = 
 
-		Vector3.MoveTowards(transform.position, Target.position, Time.deltaTime*bulletSpeed);//子弹按照最初的方向运动
+		Vector3.MoveTowards(transform.position, Target, Time.deltaTime*bulletSpeed);//子弹按照最初的方向运动
 		//
 
 		}

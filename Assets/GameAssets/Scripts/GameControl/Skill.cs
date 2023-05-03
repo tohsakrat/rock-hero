@@ -30,7 +30,7 @@ public class Skill : MonoBehaviour
     virtual public void trigger(){
          
 
-            GameObject bullet = Instantiate(bulletPrefab, Hero.r.transform.position, Hero.r.transform.rotation,Regedit.blt);
+            GameObject bullet = Instantiate(bulletPrefab, Hero.r.transform.position, Hero.r.transform.rotation,Regedit.r.BulletLayer);
 
             bullet.SetActive(true);
 

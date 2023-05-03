@@ -11,7 +11,7 @@ public class Hero : MonoBehaviour
 	public GameObject healParticleEffect;
 
 	//Components
-	public SpriteRenderer sr;//贴图 
+	
 	public  Material mat;//主角材质
 	public Vector4 flashColor;//闪烁颜色
 
@@ -85,7 +85,7 @@ public class Hero : MonoBehaviour
 		r = this; 
 		//技能列表，现在只是把技能注册表里的所有技能都加进来了
 		//取SkillDic中每个值，加入到Skills列表中
-		foreach (KeyValuePair<string, Skill> kvp in Regedit.SkillDic)
+		foreach (KeyValuePair<string, Skill> kvp in Regedit.r.SkillDic)
 		{
 			Skills.Add(kvp.Value);
 		}
@@ -161,7 +161,7 @@ public class Hero : MonoBehaviour
 		//Debug.Log("主角射击");
 		//每次触发，随机tigger一个skill中的技能
 		Skill s=Skills[Random.Range(0,Skills.Count)];
-		Debug.Log(s);
+		//Debug.Log(s);
 		s.trigger();
 
 	}

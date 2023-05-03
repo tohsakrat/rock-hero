@@ -14,9 +14,13 @@ public class playItselfGif : MonoBehaviour
 
 
     void Start()
-    {   m_spriteRenderer=GetComponent<SpriteRenderer>();
-       Destroy ( m_spriteRenderer);
+    {   
+        m_spriteRenderer=GetComponent<SpriteRenderer>();
+
+        if( m_spriteRenderer!=null)Destroy ( m_spriteRenderer);//如果有spriteRenderer预览图，就删掉
+
         m_rawImage=GetComponent<UniGifImage>().m_rawImage;
+
         gifImage=GetComponent<UniGifImage>();
         if (m_mutex || gifImage == null || string.IsNullOrEmpty(gifUrlInput))
         {

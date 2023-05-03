@@ -10,9 +10,9 @@ public class Regedit : MonoBehaviour
     public static List<Enemy> Enemies =  new  List<Enemy>();//敌人
     public static List<Pickup> Bag =  new  List<Pickup>();//背包
     public static List<Pickup> Pickups =  new  List<Pickup>();//补给(还没被捡起来)
-    public static Dictionary<string,Skill> SkillDic = new Dictionary<string,Skill>();//全局技能图鉴,只有技能不需要被实例化，所以类型不是GameObject
-    public static Dictionary<string,GameObject> EnemyDic = new Dictionary<string,GameObject>();//全局敌人图鉴
-    public static Dictionary<string,GameObject> PickupDic = new Dictionary<string,GameObject>();//全局道具图鉴
+    public Dictionary<string,Skill> SkillDic = new Dictionary<string,Skill>();//全局技能图鉴,只有技能不需要被实例化，所以类型不是GameObject
+    public Dictionary<string,GameObject> EnemyDic = new Dictionary<string,GameObject>();//全局敌人图鉴
+    public Dictionary<string,GameObject> PickupDic = new Dictionary<string,GameObject>();//全局道具图鉴
     public string EnemyDir;//敌人文件存放目录
     public string PickupDir;//道具文件存放目录
     public string SkillDir;//技能脚本文件存放目录
@@ -20,11 +20,16 @@ public class Regedit : MonoBehaviour
     public Transform  ModelLayer;//模型层
     public Transform  ViewLayer;//视图层
 
-    public Transform BulletLayer;//子弹层
-    public Transform PickupLayer;//补给层
-    public static Transform blt;
+    public  Transform BulletLayer;//子弹层
+    public  Transform PickupLayer;//补给层
+
+    public GameObject deathParticleEffect;
+
+    public static Regedit r;
+
+    
     void Awake(){
-        blt=BulletLayer;
+        r=this;
         //读取敌人目录中全部预制体文件
         Object[] enemyPrefabs = Resources.LoadAll(EnemyDir, typeof(GameObject));
         foreach (Object enemyPrefab in enemyPrefabs)

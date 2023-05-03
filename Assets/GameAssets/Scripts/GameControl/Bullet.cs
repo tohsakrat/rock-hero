@@ -39,6 +39,7 @@ public class Bullet : MonoBehaviour
 		//如果打中敌人，就造成伤害
 		if(col.gameObject.tag == "Enemy")
 		{
+			
 			col.gameObject.GetComponent<Enemy>().TakeDamage(damage);
 			SpawnParticleEffect();
 			Destroy(gameObject);

@@ -532,7 +532,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: pkq.gif
+  m_Text: "\u626B\u5730\u673A\u5668\u4EBAV2.1.gif"
   m_CaretBlinkRate: 1.7
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -750,12 +750,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fd6cbdfc70f72a4b9917bb1fd0fe660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_rawImage: {fileID: 0}
+  m_rawImage: {fileID: 752814568}
   m_imgAspectCtrl: {fileID: 752814567}
   m_filterMode: 1
   m_wrapMode: 1
   m_loadOnStart: 0
-  m_loadOnStartUrl: 
+  m_loadOnStartUrl: "\u626B\u5730\u673A\u5668\u4EBAV2.1.gif"
   m_rotateOnLoading: 1
   m_outputDebugLog: 0
 --- !u!114 &752814567
@@ -787,9 +787,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -840,8 +840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a48309118dc5fe84ab225cfced385fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gifUrlInput: pkq.gif
-  gifImage: {fileID: 752814566}
+  gifUrlInput: "\u626B\u5730\u673A\u5668\u4EBAV2.1.gif"
 --- !u!1 &763911185
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,7 +1194,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: pkq.gif
+  m_Text: "\u626B\u5730\u673A\u5668\u4EBAV2.1.gif"
 --- !u!222 &1058623882
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1726,7 +1725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e59fe1dc9349fc45b3e1143f4496873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gifUrlInput: pkq.gif
+  gifUrlInput: "\u626B\u5730\u673A\u5668\u4EBAV2.1.gif"
   gifImage: {fileID: 752814566}
 --- !u!4 &1390710247
 Transform:
