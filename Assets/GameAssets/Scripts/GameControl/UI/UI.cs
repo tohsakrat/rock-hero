@@ -29,8 +29,8 @@ public class UI : MonoBehaviour
 
 	void Start ()
 	{
-		planetHealthBar.maxValue = Hero.r.health;
-		planetHealthBar.value = Hero.r.health;
+		planetHealthBar.maxValue = (int)Hero.r.maxHealth;
+		planetHealthBar.value = (int)Hero.r.health;
 		AudioManager.am.PlayManual();
 	}
 

@@ -248,11 +248,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 880da7039fc8ceb4fb13ceef267f6a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 4
   hitParticleEffect: {fileID: 1706759898638172, guid: a967b8c0d425dbf4db298df7943a4533,
     type: 3}
+  anchor: {fileID: 0}
   bulletSpeed: 25
-  lifeTime: 1
+  lifeTime: 5
   baseSpeed: {x: 1, y: 0, z: 0}
 --- !u!114 &-213155961782918643
 MonoBehaviour:
@@ -269,9 +270,9 @@ MonoBehaviour:
   name: 
   canUse: 0
   bulletPrefab: {fileID: 1470232904424208}
-  bulletSpeed: 0
   icon: {fileID: 0}
-  baseSpeed: {x: 10, y: 0, z: 0}
+  Beats: 1
+  baseSpeed: {x: 100, y: 0, z: 0}
 --- !u!1 &4537469407377160906
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,7 +299,7 @@ Transform:
   m_GameObject: {fileID: 4537469407377160906}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4763615437519920}

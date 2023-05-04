@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class BulletLayEgg : Bullet
 {	public Vector3 baseSpeed;
-
+	override public void Start(){
+		base.Start();
+		baseSpeed = baseSpeed * Hero.r.currentStatus.bulletSpeed;
+	}
 	override public void moveRule(){
 		//-----------------在这里写自己的逻辑--------------------
 
@@ -25,10 +28,21 @@ public class BulletLayEgg : Bullet
 				}
 		}
 		
-		baseSpeed -= Time.deltaTime/lifeTime*baseSpeed;//子弹初速度随时间减小
+		baseSpeed -= Time.deltaTime/lifeTime*10 *baseSpeed;//子弹初速度随时间减小
 		transform.position =baseSpeed * Time.deltaTime+
 		Vector3.MoveTowards(transform.position, Regedit.Enemies[MinDis].transform.position, bulletSpeed * Time.deltaTime);//子弹追踪最近敌人
-		//
+		//头旋转向敌人
+		Vector3 dir = Regedit.Enemies[MinDis].transform.position - transform.position;
+		//后天旋转
+		float angle1 = Mathf.Atan2(dir.y,dir.x)*Mathf.Rad2Deg;
+		//初速度旋转
+		float angle2 = Mathf.Atan2(baseSpeed.y,baseSpeed.x)*Mathf.Rad2Deg;
+		//加权平均
+		float angle = (angle1*bulletSpeed+angle2*baseSpeed.magnitude)/(baseSpeed.magnitude+bulletSpeed);
+		transform.rotation = Quaternion.AngleAxis(angle-91,Vector3.forward);
+
+		
+		
 
 		}
 

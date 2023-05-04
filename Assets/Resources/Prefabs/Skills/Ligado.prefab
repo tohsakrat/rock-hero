@@ -325,7 +325,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 346230341
-  m_SortingLayer: 1
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 24c9cf09dc5f87a4ca43d8b845553533, type: 3}
   m_Color: {r: 1, g: 0.9111967, b: 0.625, a: 1}
@@ -400,8 +400,8 @@ MonoBehaviour:
   name: 
   canUse: 0
   bulletPrefab: {fileID: 6298615457813700423}
-  bulletSpeed: 0
   icon: {fileID: 0}
+  Beats: 1
 --- !u!114 &5967000430718086497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,8 +415,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  hitParticleEffect: {fileID: 1706759898638172, guid: a967b8c0d425dbf4db298df7943a4533,
+  hitParticleEffect: {fileID: 4862403284011791462, guid: c946fa5746cd9264a931aedc357a059e,
     type: 3}
+  anchor: {fileID: 0}
   bulletSpeed: 5
   lifeTime: 10
   heroSize: 1
@@ -424,7 +425,7 @@ MonoBehaviour:
   circleCollider: {fileID: 3141635162065875101}
   circle1: {fileID: 6298615458492916677}
   circle2: {fileID: 6298615457377003613}
-  totalTime: 0
+  r3: 0
 --- !u!1 &6298615458492916679
 GameObject:
   m_ObjectHideFlags: 0
@@ -5512,6 +5513,7 @@ MonoBehaviour:
   damage: 0
   hitParticleEffect: {fileID: 1706759898638172, guid: a967b8c0d425dbf4db298df7943a4533,
     type: 3}
+  anchor: {fileID: 0}
   bulletSpeed: 0
   lifeTime: 9999
   father: {fileID: 5967000430718086497}

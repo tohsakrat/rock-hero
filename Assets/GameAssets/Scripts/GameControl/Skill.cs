@@ -11,9 +11,8 @@ public class Skill : MonoBehaviour
     public string name;//技能名
     public bool canUse;//是否可以使用
     public GameObject bulletPrefab;//子弹预制体，如果未绑定则默认绑定自己
-    public float bulletSpeed;//子弹速度
     public  SpriteRenderer icon;//技能图标
-
+    public  int Beats;//节拍数
 
 	public void Start(){}
 	public void Awake(){

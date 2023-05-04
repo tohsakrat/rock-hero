@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3251030856277117004}
   - component: {fileID: 2160584190826132884}
   - component: {fileID: 7961263086665908958}
-  - component: {fileID: 827604639858381129}
+  - component: {fileID: 6647020183800671072}
+  - component: {fileID: 8659573247972419162}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -64,8 +65,10 @@ MonoBehaviour:
     type: 3}
   bodyTexture: {fileID: 0}
   angleOffset: 0
+  colliderTriger: {fileID: 2834613057258968051}
   stunned: 0
   isKilled: 0
+  angle: 0
   dis: 0
 --- !u!222 &7961263086665908958
 CanvasRenderer:
@@ -75,8 +78,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129669299386006}
   m_CullTransparentMesh: 1
---- !u!68 &827604639858381129
-EdgeCollider2D:
+--- !u!58 &6647020183800671072
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -85,24 +88,33 @@ EdgeCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.11597696, y: -0.46160382}
-  - {x: -0.42936784, y: -0.3941188}
-  - {x: -0.31654435, y: 0.21407624}
-  - {x: 0.02784653, y: 0.43249056}
-  - {x: 0.20124741, y: -0.14004976}
-  - {x: 0.27606633, y: -0.17202708}
-  - {x: 0.25794908, y: -0.38370717}
-  - {x: -0.087890685, y: -0.45878094}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+  m_Offset: {x: -0.097135544, y: -0.09989166}
+  serializedVersion: 2
+  m_Radius: 0.43528557
+--- !u!50 &8659573247972419162
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129669299386006}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 10
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!1 &2834613057258968051
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,8 +130,7 @@ GameObject:
   - component: {fileID: 9089991199971706942}
   - component: {fileID: 1528796850605130823}
   - component: {fileID: 328121899866828058}
-  - component: {fileID: 2482700797170428866}
-  - component: {fileID: 1312523530045933584}
+  - component: {fileID: 6629756099277348495}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Untagged
@@ -281,29 +292,9 @@ MonoBehaviour:
   m_wrapMode: 1
   m_outputDebugLog: 0
   path: 
---- !u!50 &2482700797170428866
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2834613057258968051}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
---- !u!58 &1312523530045933584
-CircleCollider2D:
+  m_gifTextureIndex: 0
+--- !u!68 &6629756099277348495
+EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -312,9 +303,21 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.097135544, y: -0.09989166}
-  serializedVersion: 2
-  m_Radius: 0.43528557
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.11597696, y: -0.46160382}
+  - {x: -0.42936784, y: -0.3941188}
+  - {x: -0.31654435, y: 0.21407624}
+  - {x: 0.02784653, y: 0.43249056}
+  - {x: 0.20124741, y: -0.14004976}
+  - {x: 0.27606633, y: -0.17202708}
+  - {x: 0.25794908, y: -0.38370717}
+  - {x: -0.087890685, y: -0.45878094}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0

@@ -9,7 +9,7 @@ public class BulletSweep : Bullet
 	
 	override public void moveRule(){
 
-	transform.position = transform.position + v*Time.deltaTime;//子弹按照最初的方向运动
+	transform.position = transform.position + v*Time.deltaTime*bulletSpeed;//子弹按照最初的方向运动
 
 	}
 

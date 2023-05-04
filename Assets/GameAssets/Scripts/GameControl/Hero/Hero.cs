@@ -4,32 +4,46 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour 
 {	
-	public int health;//生命值
+	public float health;//剩余生命值
 
-	//Prefabs
+	[Header("Prefabs")]
 	public GameObject deathParticleEffect;
 	public GameObject healParticleEffect;
 
-	//Components
-	
-	public  Material mat;//主角材质
-	public Vector4 flashColor;//闪烁颜色
+	[Header("视觉参数")]
 
+	public Vector4 flashColor;//闪烁颜色
+	public  Material mat;//主角材质
+
+
+
+	[Header("主角状态*数值策划看这里")]
 	//主角状态，用于初始化主角的各种状态，只是为了在unity编辑器中调试。如果要引用主角的实时状态，用Hero.r.BaseStatus.moveSpeed这种形式
-	public float moveSpeed;//移动速度
-	public float attack;//攻击力
-	public float BeatsPerMinute;//每分钟拍数
-	public float attackRate;//攻击速度，每拍打几下
-	public float bulletSpeed;//子弹速度
-	public float bulletSpread = 1.0f;//子弹散布度	
-	public float maxHealth=10f;//生命上限
+		public float maxHealth;//生命上限
+		public float attack;//攻击力
+		public float BeatsPerMinute;//每分钟拍数
+		public float attackRate;//攻击速度，每拍打几下
+		public float moveSpeed;//移动速度
+		public float pickupRadius;//拾起半径
+		public float luck;//幸运值，影响掉落率
+		public float healthRecover;//生命恢复
+		public float healthSteal;//吸血率
+		public float bulletSpeed;//子弹速度
+		public float bulletRange ;//射程
+
+	public status baseStatus;//基础状态
+	public status customPoints;//自定义加点
+	public status buffedStatus;//Buff和Debuff叠加之和
+	public status currentStatus;//实时状态
 
 	//控制变量
 	
 	public static Hero r;
 	public bool canMove;
-	public bool canHoldFire; //是否可以射击
+	[Header("临时变量")]
+	public bool canHoldFire; //是否可以射击，用来阻塞技能
    	public float timer = 0;//计时器
+   	public int beatsLeft = 0;//剩余拍数
 	public  List<Skill> Skills= new List<Skill>();//技能列表
 	public  List<Pickup> items= new List<Pickup>();//道具列表
 	
@@ -39,49 +53,77 @@ public class Hero : MonoBehaviour
 
 	public class status //主角状态类，用于存储主角的各种状态，比如移动速度，攻击力等等
 	{	
-		public float moveSpeed;//移动速度
+		public float maxHealth;//生命上限
 		public float attack;//攻击力
 		public float BeatsPerMinute;//每分钟拍数
 		public float attackRate;//攻击速度，每拍打几下
-		public float bulletSpeed;//子弹速度
-		public float bulletSpread ;//子弹散布度
-		public float maxHealth;//生命上限
+		public float moveSpeed;//移动速度
+		public float pickupRadius;//拾起半径
+		public float luck;//幸运值，影响掉落率
+		public float healthRecover;//生命恢复
+		public float healthSteal;//吸血率
+		public float bulletSpeed;//子弹速度，是一个倍率，用于乘以具体子弹的速度
+		public float bulletRange ;//射程
 
-		public  status(float moveSpeed,float attack,float BeatsPerMinute,float attackRate,float bulletSpeed,float bulletSpread,float maxHealth){
-			this.moveSpeed=moveSpeed;
+		//构造函数
+		public status(float maxHealth,float attack,float BeatsPerMinute,float attackRate,float moveSpeed,float pickupRadius,float luck,float healthRecover,float healthSteal,float bulletSpeed,float bulletRange){
+			this.maxHealth=maxHealth;
 			this.attack=attack;
 			this.BeatsPerMinute=BeatsPerMinute;
 			this.attackRate=attackRate;
+			this.moveSpeed=moveSpeed;
+			this.pickupRadius=pickupRadius;
+			this.luck=luck;
+			this.healthRecover=healthRecover;
+			this.healthSteal=healthSteal;
 			this.bulletSpeed=bulletSpeed;
-			this.bulletSpread=bulletSpread;
-			this.maxHealth=maxHealth;
-		}
-		
-		//状态加法运算符重载
-		
-		public static Hero.status operator+ (Hero.status b, Hero.status c)
-		{
-			return new Hero.status(
-				b.moveSpeed+c.moveSpeed,
-				b.attack+c.attack,
-				b.BeatsPerMinute+c.BeatsPerMinute,
-				b.attackRate+c.attackRate,
-				b.bulletSpeed+c.bulletSpeed,
-				b.bulletSpread+c.bulletSpread,
-				b.maxHealth+c.maxHealth
-			);
+			this.bulletRange=bulletRange;
 		}
 
+		//重定义加法运算符
+		public static status operator +(status a,status b){
+			status c=new status(
+				a.maxHealth+b.maxHealth,
+				a.attack+b.attack,
+				a.BeatsPerMinute+b.BeatsPerMinute,
+				a.attackRate+b.attackRate,
+				a.moveSpeed+b.moveSpeed,
+				a.pickupRadius+b.pickupRadius,
+				a.luck+b.luck,
+				a.healthRecover+b.healthRecover,
+				a.healthSteal+b.healthSteal,
+				a.bulletSpeed+b.bulletSpeed,
+				a.bulletRange+b.bulletRange
+			);
+			return c;
+		}
+
+		
 
 	}
 
-	public status BaseStatus;//基础状态
-	public status BuffStatus;//Buff状态
 
 	void Start () { 
 
 		//初始化状态
-		BaseStatus=new status(moveSpeed,attack,BeatsPerMinute,attackRate,bulletSpeed,bulletSpread,maxHealth);
+		baseStatus=new status(
+			maxHealth,
+			attack,
+			BeatsPerMinute,
+			attackRate,
+			moveSpeed,
+			pickupRadius,
+			luck,
+			healthRecover,
+			healthSteal,
+			bulletSpeed,
+			bulletRange
+		);
+		customPoints=new status(0,0,0,0,0,0,0,0,0,0,0);
+		buffedStatus=new status(0,0,0,0,0,0,0,0,0,0,0);
+
+
+
 		r = this; 
 		//技能列表，现在只是把技能注册表里的所有技能都加进来了
 		//取SkillDic中每个值，加入到Skills列表中
@@ -103,6 +145,8 @@ public class Hero : MonoBehaviour
 
 
 		if(Game.g.gameActive){
+		
+		currentStatus=baseStatus+customPoints+buffedStatus;
 
 		transform.position= new Vector3(transform.position.x,transform.position.y,0);
 
@@ -117,11 +161,12 @@ public class Hero : MonoBehaviour
 		if(canHoldFire){
 		
 		if(
-			timer>60f/BeatsPerMinute/attackRate//每拍打几下
+			timer>60f/BeatsPerMinute
 			){
 				
 			timer=0;
-			Shoot();
+			beatsLeft--;
+			if(beatsLeft<=0)Shoot();
 		}
 		}
 
@@ -163,14 +208,21 @@ public class Hero : MonoBehaviour
 		Skill s=Skills[Random.Range(0,Skills.Count)];
 		//Debug.Log(s);
 		s.trigger();
+		beatsLeft=s.Beats;
 
 	}
 
 
 
 	//受到伤害
-	public void TakeDamage (int dmg)
+	public void TakeDamage (float dmg)
 		{
+			//闪避判定
+			if(Random.Range(0.0f, 1.0f) < luck)
+			{
+				//Game.g.SpriteFlash(sr);
+				return;
+			}
 			//If the health is less than or equal to 0, then end the game.
 			if(health - dmg <= 0)
 			{
@@ -187,7 +239,7 @@ public class Hero : MonoBehaviour
 
 			//Game.g.SpriteFlash(sr);
 
-			UI.ui.SetPlanetHealthBarValue(health);
+			UI.ui.SetPlanetHealthBarValue((int)health);
 		}
 	
 
@@ -235,10 +287,6 @@ public class Hero : MonoBehaviour
 		}else{
 			mat.SetVector("_brightness",v);
 		}
-
-
-
-
 
 	}
 

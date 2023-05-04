@@ -19,8 +19,8 @@ public class PickupAtk : Pickup
 	}
 
 
-    public Hero.status item(Hero.status s){
-        return new Hero.status(s.moveSpeed,s.attack+2,s.BeatsPerMinute,s.attackRate,s.bulletSpeed,s.bulletSpread,s.maxHealth);
+    public Hero.status item(){
+        return new Hero.status(0,2,0,0,0,0,0,0,0,0,0);
     }
 
 

@@ -6,12 +6,14 @@ public class Bullet : MonoBehaviour
 {
 	public int damage; //子弹伤害
 	public GameObject hitParticleEffect;//击中特效
+	public GameObject anchor;//击中特效
 	public float bulletSpeed;//子弹速度
 	public float lifeTime;//子弹生命时间
 
 	virtual public void Start ()
 	{
 		Destroy(gameObject, lifeTime);//子弹生命时间到了就销毁
+		bulletSpeed=bulletSpeed*Hero.r.currentStatus.bulletSpeed;//子弹速度随英雄属性变化
 	}
 
 	public void  Update(){
@@ -23,7 +25,7 @@ public class Bullet : MonoBehaviour
 			//子弹移动
 			 moveRule();
 		}
-
+		if(anchor!=null)transform.position=anchor.transform.position;
 		
 	}
 

@@ -114,7 +114,10 @@ MonoBehaviour:
     type: 3}
   bodyTexture: {fileID: 0}
   angleOffset: 0
+  colliderTriger: {fileID: 0}
   stunned: 0
+  isKilled: 0
+  angle: 0
   dis: 0
 --- !u!58 &58240136130071084
 CircleCollider2D:
@@ -167,7 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   health: 10
-  moveSpeed: 1.2
+  moveSpeed: 3
   angleSpeed: 10
   damage: 2
   lockAngle: 0
@@ -177,7 +180,10 @@ MonoBehaviour:
     type: 3}
   bodyTexture: {fileID: 0}
   angleOffset: 0
+  colliderTriger: {fileID: 0}
   stunned: 0
+  isKilled: 0
+  angle: 0
   dis: 0
 --- !u!1 &1639882506122404
 GameObject:

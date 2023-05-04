@@ -62,12 +62,6 @@ public class AudioManager : MonoBehaviour
 
 
 
-
-
-
-
-
-
 	public void PlayShoot ()
 	{
 	audioSource.PlayOneShot(shoot1);

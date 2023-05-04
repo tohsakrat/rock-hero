@@ -5,7 +5,7 @@ using UnityEngine;
 public class Sweep : Skill
 {   
 
-    public Vector3 v;
+ 
 
     public void Start(){
        if(name=="")this.name="Sweep";//如果没有名字，就给一个名字
@@ -16,7 +16,7 @@ public class Sweep : Skill
 
     override public void trigger(){
         
-      // v=v*bulletSpeed;
+      // v=Hero.r.currentStatus.bulletSpeed;
         Even();
         Invoke("Odd",60f/Hero.r.BeatsPerMinute/Hero.r.attackRate/8);
         Invoke("Even",60f/Hero.r.BeatsPerMinute/Hero.r.attackRate/4);
@@ -28,16 +28,17 @@ public class Sweep : Skill
 
         GameObject bullet1 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.r.BulletLayer);
         
-        bullet1.GetComponent<BulletSweep>().setSpeed(v*bulletSpeed);
+        bullet1.GetComponent<BulletSweep>().setSpeed(Hero.r.currentStatus.bulletSpeed*Vector3.up);
+
         bullet1.SetActive(true);
         GameObject bullet2 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.r.BulletLayer);
-        bullet2.GetComponent<BulletSweep>().setSpeed(RotateRound(v*bulletSpeed,90));
+        bullet2.GetComponent<BulletSweep>().setSpeed(RotateRound(Hero.r.currentStatus.bulletSpeed*Vector3.up,90));
         bullet2.SetActive(true);
         GameObject bullet3 = Instantiate(bulletPrefab,Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.r.BulletLayer);
-        bullet3.GetComponent<BulletSweep>().setSpeed(RotateRound(v*bulletSpeed,180));
+        bullet3.GetComponent<BulletSweep>().setSpeed(RotateRound(Hero.r.currentStatus.bulletSpeed*Vector3.up,180));
         bullet3.SetActive(true);
         GameObject bullet4 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.r.BulletLayer);
-        bullet4.GetComponent<BulletSweep>().setSpeed(RotateRound(v*bulletSpeed,270));
+        bullet4.GetComponent<BulletSweep>().setSpeed(RotateRound(Hero.r.currentStatus.bulletSpeed*Vector3.up,270));
         bullet4.SetActive(true);
 
     }
@@ -45,16 +46,16 @@ public class Sweep : Skill
      private void Odd(){
 
         GameObject bullet1 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.r.BulletLayer);
-        bullet1.GetComponent<BulletSweep>().setSpeed(RotateRound(v*bulletSpeed,45));
+        bullet1.GetComponent<BulletSweep>().setSpeed(RotateRound(Hero.r.currentStatus.bulletSpeed*Vector3.up,45));
         bullet1.SetActive(true);
         GameObject bullet2 = Instantiate(bulletPrefab,Hero.r.transform.position, new Quaternion(0,0,0,0),Regedit.r.BulletLayer);
-        bullet2.GetComponent<BulletSweep>().setSpeed(RotateRound(v*bulletSpeed,135));
+        bullet2.GetComponent<BulletSweep>().setSpeed(RotateRound(Hero.r.currentStatus.bulletSpeed*Vector3.up,135));
         bullet2.SetActive(true);
         GameObject bullet3 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0),Regedit.r.BulletLayer);
-        bullet3.GetComponent<BulletSweep>().setSpeed(RotateRound(v*bulletSpeed,225));
+        bullet3.GetComponent<BulletSweep>().setSpeed(RotateRound(Hero.r.currentStatus.bulletSpeed*Vector3.up,225));
         bullet3.SetActive(true);
         GameObject bullet4 = Instantiate(bulletPrefab, Hero.r.transform.position,new Quaternion(0,0,0,0), Regedit.r.BulletLayer);
-        bullet4.GetComponent<BulletSweep>().setSpeed(RotateRound(v*bulletSpeed,315));
+        bullet4.GetComponent<BulletSweep>().setSpeed(RotateRound(Hero.r.currentStatus.bulletSpeed*Vector3.up,315));
         bullet4.SetActive(true);
     }
 
