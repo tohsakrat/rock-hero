@@ -67,7 +67,7 @@ MonoBehaviour:
   angleSpeed: 10
   lockAngle: 1
   isBoundary: 0
-  canFocus: 1
+  canFocus: 0
   dropRate: 0.5
   deathParticleEffect: {fileID: 1706759898638172, guid: a967b8c0d425dbf4db298df7943a4533,
     type: 3}
