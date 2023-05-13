@@ -39,7 +39,7 @@ public class playItselfGif : MonoBehaviour
     }
 
      private IEnumerator ViewGifCoroutine()
-    {   Debug.Log(gifUrlInput);
+    {  // Debug.Log(gifUrlInput);
         yield return StartCoroutine(gifImage.SetGifFromUrlCoroutine(gifUrlInput));
         m_mutex = false;
     }

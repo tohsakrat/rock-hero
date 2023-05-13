@@ -101,8 +101,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.8352942, b: 0.3019608, a: 0.50980395}
-      key1: {r: 1, g: 0.8352942, b: 0.3019608, a: 0}
+      key0: {r: 0, g: 1, b: 0.21964121, a: 1}
+      key1: {r: 0, g: 0.7069087, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -117,7 +117,7 @@ TrailRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 43947
+      atime0: 0
       atime1: 65535
       atime2: 0
       atime3: 0
@@ -134,7 +134,7 @@ TrailRenderer:
     textureMode: 0
     shadowBias: 0
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0.001
   m_Autodestruct: 0
   m_Emitting: 1
 --- !u!212 &212744944643000644
@@ -252,7 +252,7 @@ MonoBehaviour:
   hitParticleEffect: {fileID: 1706759898638172, guid: a967b8c0d425dbf4db298df7943a4533,
     type: 3}
   anchor: {fileID: 0}
-  bulletSpeed: 25
+  bulletSpeed: 35
   lifeTime: 5
   baseSpeed: {x: 1, y: 0, z: 0}
 --- !u!114 &-213155961782918643
@@ -299,7 +299,7 @@ Transform:
   m_GameObject: {fileID: 4537469407377160906}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4763615437519920}

@@ -97,8 +97,8 @@ public class BulletGlissando : Bullet
 		//如果打中敌人，就造成伤害
 		if(col.gameObject.tag == "Enemy")
 		{
-			col.gameObject.GetComponent<Enemy>().TakeDamage(damage);
-			SpawnParticleEffect();
+			col.gameObject.GetComponent<EnemyCollider>().root.TakeDamage(damage);
+			//SpawnParticleEffect();
 		}
 
 		//如果打中盾牌，就造成伤害

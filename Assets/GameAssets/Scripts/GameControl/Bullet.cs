@@ -42,7 +42,10 @@ public class Bullet : MonoBehaviour
 		if(col.gameObject.tag == "Enemy")
 		{
 			
-			col.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+			col.gameObject.GetComponent<EnemyCollider>().root.TakeDamage(damage);
+			//获取碰撞位置，并将2d碰撞点转换为z为0的vetror3
+        	//Vector3 hitPoint = col.contacts[0].point;
+			//hitPoint.z = 0;
 			SpawnParticleEffect();
 			Destroy(gameObject);
 		}
@@ -62,8 +65,12 @@ public class Bullet : MonoBehaviour
 			SpawnParticleEffect();
 			Destroy(gameObject);
 		}
-
 	}
+
+
+
+
+
 
 	virtual  public void SpawnParticleEffect ()
 	{

@@ -30,6 +30,20 @@ public class Hero : MonoBehaviour
 		public float healthSteal;//吸血率
 		public float bulletSpeed;//子弹速度
 		public float bulletRange ;//射程
+		
+
+		public enum heroState{
+			//枚举属性，主角是否移动或者待机
+			idle,
+			move
+		}
+
+		heroState state=heroState.idle;
+
+	[Header("设置")]
+		public bool mouseMode=true;
+
+
 
 	public status baseStatus;//基础状态
 	public status customPoints;//自定义加点
@@ -191,9 +205,32 @@ public class Hero : MonoBehaviour
 	}
 
 	void movHero ()
-	{	transform.position = Vector3.MoveTowards(transform.position, mousePositionWorld.transform.position, moveSpeed * Time.deltaTime);
-		//transform.position += new Vector3(moveSpeed * Input.GetAxis("Horizontal") * Time.deltaTime,   moveSpeed * Input.GetAxis("Vertical") * Time.deltaTime, 0);
-		//rocketSprite.localEulerAngles = new Vector3(0, 0, Input.GetAxis("Horizontal") * -30);
+	{	
+		if(mouseMode){
+			transform.position = Vector3.MoveTowards(transform.position, mousePositionWorld.transform.position, moveSpeed * Time.deltaTime);
+			heroState state=heroState.move;
+		}else{
+			state=heroState.idle;
+			//键盘模式
+			if(Input.GetKey(KeyCode.W)){
+				transform.position+=new Vector3(0,moveSpeed*Time.deltaTime,0);
+				heroState state=heroState.move;
+			}
+			if(Input.GetKey(KeyCode.S)){
+				transform.position+=new Vector3(0,-moveSpeed*Time.deltaTime,0);
+				heroState state=heroState.move;
+			}
+			if(Input.GetKey(KeyCode.A)){
+				transform.position+=new Vector3(-moveSpeed*Time.deltaTime,0,0);
+				heroState state=heroState.move;
+			}
+			if(Input.GetKey(KeyCode.D)){
+				transform.position+=new Vector3(moveSpeed*Time.deltaTime,0,0);
+				heroState state=heroState.move;
+			}
+
+		}
+		
 	}
 
 	/*--------------------------
@@ -238,7 +275,7 @@ public class Hero : MonoBehaviour
 			CameraController.c.Shake(0.3f, 0.5f, 50.0f);
 
 			//Game.g.SpriteFlash(sr);
-
+			getDmgAnimate ();
 			UI.ui.SetPlanetHealthBarValue((int)health);
 		}
 	
@@ -269,6 +306,17 @@ public class Hero : MonoBehaviour
 
 	}
 
+
+	//受伤
+		public void getDmgAnimate ()
+	{
+
+		//一秒钟后执行flashSr
+		flashSr();
+		flashColor=new Vector4(2f,2f,2f,2f);
+
+	}
+
 	//捡起
 
 
@@ -283,7 +331,7 @@ public class Hero : MonoBehaviour
 		//如果当前亮度是全1的vector4，就设置为全1.5的vector4，否则设置为全1的vector4
 		if(mat.GetVector("_brightness")==v){
 			mat.SetVector("_brightness",v1);
-			Invoke("flashSr",0.2f);//一秒钟后执行flashSr,把调高的亮度调回来
+			Invoke("flashSr",0.2f);//0.2秒钟后执行flashSr,把调高的亮度调回来
 		}else{
 			mat.SetVector("_brightness",v);
 		}

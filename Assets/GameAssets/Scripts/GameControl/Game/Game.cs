@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
 	public float gameTime;
 	public float gameTimeHighscore;
 	public bool gameActive;
+	public bool Debuging;
 
 	public GameObject planetShield;
 	public GameObject turret;

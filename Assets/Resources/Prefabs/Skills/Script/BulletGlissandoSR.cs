@@ -19,7 +19,7 @@ public class BulletGlissandoSR : Bullet
 
 	override  public void OnTriggerEnter2D (Collider2D col)
 	{
-		//Debug.Log("子弹碰撞到了");
+		//Debug.Log("横扫子弹碰撞到了");
 		//Debug.Log(col);
 		//如果打中敌人，就造成伤害
 

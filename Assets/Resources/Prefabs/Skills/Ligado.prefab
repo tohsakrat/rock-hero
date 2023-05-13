@@ -415,13 +415,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  hitParticleEffect: {fileID: 4862403284011791462, guid: c946fa5746cd9264a931aedc357a059e,
+  hitParticleEffect: {fileID: 1706759898638172, guid: a967b8c0d425dbf4db298df7943a4533,
     type: 3}
   anchor: {fileID: 0}
   bulletSpeed: 5
   lifeTime: 10
   heroSize: 1
-  r: 5
+  r: 10
   circleCollider: {fileID: 3141635162065875101}
   circle1: {fileID: 6298615458492916677}
   circle2: {fileID: 6298615457377003613}

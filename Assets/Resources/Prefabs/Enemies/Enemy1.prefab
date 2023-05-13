@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8659573247972419162}
   m_Layer: 0
   m_Name: Enemy1
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ RectTransform:
   m_GameObject: {fileID: 1129669299386006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 3}
+  m_LocalScale: {x: 6, y: 6, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6771953123803287385}
@@ -54,21 +54,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: 
-  health: 5
-  moveSpeed: 5
+  health: 15
+  damage: 10
+  moveSpeed: 8
+  defense: 0
   angleSpeed: 10
-  damage: 1
   lockAngle: 1
-  canFocus: 0
+  isBoundary: 0
+  canFocus: 1
   dropRate: 0.5
   deathParticleEffect: {fileID: 1039865511874772, guid: 9d838c99f2af4294c9a60baeecacc759,
     type: 3}
-  bodyTexture: {fileID: 0}
+  bodyTexture: {fileID: 2834613057258968051}
   angleOffset: 0
   colliderTriger: {fileID: 2834613057258968051}
+  verse: 0
   stunned: 0
   isKilled: 0
+  velocity: {x: 0, y: 0, z: 0}
   angle: 0
+  timer: 0
+  flashColor: {x: 0, y: 0, z: 0, w: 0}
   dis: 0
 --- !u!222 &7961263086665908958
 CanvasRenderer:
@@ -91,9 +97,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.097135544, y: -0.09989166}
+  m_Offset: {x: -0.105501816, y: -0.09989166}
   serializedVersion: 2
-  m_Radius: 0.43528557
+  m_Radius: 0.238355
 --- !u!50 &8659573247972419162
 Rigidbody2D:
   serializedVersion: 4
@@ -130,10 +136,11 @@ GameObject:
   - component: {fileID: 9089991199971706942}
   - component: {fileID: 1528796850605130823}
   - component: {fileID: 328121899866828058}
+  - component: {fileID: 1165235974083391433}
   - component: {fileID: 6629756099277348495}
   m_Layer: 0
   m_Name: Enemy1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -199,7 +206,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 702cdab714ce0ea4e9e57b012aa4395a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dbd3609c9cf6bd44fb45974b2d6127ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -230,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 678343fd38a0eac4fba182f0616f36d7, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -238,7 +245,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 702cdab714ce0ea4e9e57b012aa4395a, type: 3}
+  m_Texture: {fileID: 2800000, guid: dbd3609c9cf6bd44fb45974b2d6127ed, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -293,6 +300,19 @@ MonoBehaviour:
   m_outputDebugLog: 0
   path: 
   m_gifTextureIndex: 0
+--- !u!114 &1165235974083391433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2834613057258968051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb6f9965709ecd34f888c25d958b80d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root: {fileID: 2160584190826132884}
 --- !u!68 &6629756099277348495
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -303,7 +323,7 @@ EdgeCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

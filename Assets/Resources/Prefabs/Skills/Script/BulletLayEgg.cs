@@ -21,7 +21,10 @@ public class BulletLayEgg : Bullet
 			if(Regedit.Enemies[i]==null){
 				Regedit.Enemies.RemoveAt(i);
 			}
-			else{//如果敌人还活着，就计算距离
+			else{
+				//如果敌人还活着，就计算距离
+				//如果敌人不能被锁定，跳过
+				if(!Regedit.Enemies[i].canFocus)continue;
 				Regedit.Enemies[i].dis = Vector3.Distance(
 					Regedit.Enemies[i].transform.position,transform.position);
 				if(Regedit.Enemies[i].dis<Regedit.Enemies[MinDis].dis)MinDis=i;
