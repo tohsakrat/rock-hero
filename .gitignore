@@ -12,6 +12,7 @@ Assets/AssetStoreTools*
 # Visual Studio Code cache directory
 .vscode/
 
+#忽略webOutput和winOutput两个文件夹
 webOutput/
 winOutput/
 
