@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using System.Linq;
-
+using UnityEngine.Networking;
 public class Regedit : MonoBehaviour
 {
     // Start is called before the first frame update
     public static List<Enemy> Enemies =  new  List<Enemy>();//敌人
-    public static List<Pickup> Bag =  new  List<Pickup>();//背包
     public static List<Pickup> Pickups =  new  List<Pickup>();//补给(还没被捡起来)
     public Dictionary<string,Skill> SkillDic = new Dictionary<string,Skill>();//全局技能图鉴,只有技能不需要被实例化，所以类型不是GameObject
     public Dictionary<string,GameObject> EnemyDic = new Dictionary<string,GameObject>();//全局敌人图鉴
     public Dictionary<string,GameObject> PickupDic = new Dictionary<string,GameObject>();//全局道具图鉴
+    public Dictionary<string,UnityWebRequest> RequestDic = new Dictionary<string,UnityWebRequest>();//全局请求图鉴
     public string EnemyDir;//敌人文件存放目录
     public string PickupDir;//道具文件存放目录
     public string SkillDir;//技能脚本文件存放目录
+    public string gifDir;//技能脚本文件存放目录
     public Transform EnemiesParent;//敌人父节点
     public Transform  ModelLayer;//模型层
     public Transform  ViewLayer;//视图层

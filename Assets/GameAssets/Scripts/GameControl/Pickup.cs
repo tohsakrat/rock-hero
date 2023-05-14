@@ -6,8 +6,10 @@ public class Pickup : MonoBehaviour
 {
 	public int health;
 	public string name;//名字
-	public SpriteRenderer sr;//贴图
+	public SpriteRenderer sr;//贴图对象
+	public Texture2D tx;//贴图素材
 	public float timeAlive;
+	public bool isItem;
 
 	public void Start(){
 		Regedit.Pickups.Add(this);//注册当前补给到全局list中
@@ -38,6 +40,19 @@ public class Pickup : MonoBehaviour
 		virtual public void moveRule(){
 		//移动规则，每个补给都有自己的移动规则,可以对这个方法进行拓展
 		//默认固定不动
+
+	}
+	virtual public void applyName(){
+		//如果没起名，就用对象名作为名字
+		if(name == "")name = gameObject.name;
+	}
+	virtual public void saveItem(){
+		//如果没起名，就用对象名作为名字
+		        transform.parent = Bag.b.gameObject.transform;//加入背包    
+        Hero.r.items.Add(this);
+        this.gameObject.SetActive(false);
+
+         //运行基类获取补给包事件
 
 	}
 

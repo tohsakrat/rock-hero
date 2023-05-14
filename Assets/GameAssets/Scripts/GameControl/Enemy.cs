@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Enemy : MonoBehaviour 
 {
 	/*敌人母类*/
@@ -28,14 +28,17 @@ public class Enemy : MonoBehaviour
 	public GameObject bodyTexture;//贴图所在子对象
 	public float angleOffset;//子对象角度偏移
 	public GameObject colliderTriger;//实际触发事件的碰撞体,一般是子对象
-
-
-
+	public bool verse;//是否翻转
+	
+	public float rushSpan = 2;//冲刺间隔
 	
 	[Header("临时变量")]
 	public bool stunned = false;//敌人是否被眩晕
 	public bool isKilled = false;//敌人是否被击杀
+	public Vector3 velocity;//敌人速度
 	public float angle;
+	public float timer;
+	public Vector4 flashColor;//闪烁颜色
 
 	//public SpriteRenderer sr;//本敌人贴图
 	public float dis;//临时变量，用于记录敌人的距离
@@ -49,11 +52,17 @@ public class Enemy : MonoBehaviour
 		if(colliderTriger==null)colliderTriger=gameObject;
 		//为enermyTrigger添加EnemyCollider组件，并且把自己赋值给root
 		colliderTriger.AddComponent<EnemyCollider>().root = this;
-		
+		velocity = (Hero.r.transform.position
+		 - transform.position).normalized * moveSpeed;
+
+		//重新实例化material，防止修改材质时，修改到全局的材质
+		Material mat=bodyTexture.GetComponent<RawImage>().material;
+		Material materialCopy = Instantiate(mat); 
+		bodyTexture.GetComponent<RawImage>().material=materialCopy;
 
 	}
 
-	virtual public void Awake(){
+ 	virtual public void Awake(){
 		//如果没起名，就用对象名作为名字
 		if(name == "")name = gameObject.name;
 	}
@@ -71,6 +80,7 @@ public class Enemy : MonoBehaviour
 		if(!stunned && Game.g.gameActive){
 			//如果没有被眩晕，就移动
 			 moveRule();
+			 
 		}
 
 	}
@@ -81,25 +91,28 @@ public class Enemy : MonoBehaviour
 	}
 
 	virtual public void moveRule(){
-
+		timer+=Time.deltaTime;
 		//移动规则，每个敌人都有自己的移动规则,可以对这个方法进行拓展
-		transform.position = Vector3.MoveTowards(transform.position, Hero.r.transform.position, moveSpeed * Time.deltaTime);//移动到玩家的位置	
-	
+		//transform.position = Vector3.MoveTowards(transform.position, Hero.r.transform.position, moveSpeed * timer);//移动到玩家的位置	
+		//重新判定速度
+		if( timer>rushSpan){
+			velocity = (Hero.r.transform.position - transform.position).normalized * moveSpeed;
+			timer=0;
+			//stunned=true;
+			//Invoke("unStun",0.25f);
+		}
+		//朝着主角冲
+		transform.position += velocity * Time.deltaTime;
 
 		//Debug.Log("常规移动");
-		
-	}
-
-	virtual public void LateUpdate()
-	{
-		if(lockAngle){
+		        if(lockAngle ){
 			LookAtHeroLR ();//仅左右面向玩家
 		}else{
 			LookAtHeroAngle();//始终面向玩家
 		}
 		
-		//this.transform.rotation=anchor.transform.rotation;
 	}
+
 
 	virtual public float LookAtHeroAngle ( )
 	{	//使敌人始终面向玩家。
@@ -111,6 +124,22 @@ public class Enemy : MonoBehaviour
 		angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg+ angleOffset;
 		if(transform.localScale.x<0)angle=180-angle;
 		if(angle<0)angle=360+angle;
+		if(verse)angle=-angle;
+		//LookAtHeroLR ();
+
+		/*
+		if(angle>60&&angle<150){
+			if(angle>90){
+				angle=150;
+			}else{
+				angle=90;
+		}
+
+
+		}*/
+
+
+
 		Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
 		transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * angleSpeed);
 
@@ -120,13 +149,14 @@ public class Enemy : MonoBehaviour
 		//判断angle值是否处在第二象限或第三象限
 	
 		
-		if((angle > 90 && angle<270 ) && transform.localScale.y > 0)transform.localScale = 
-		new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
+		if((angle > 90 && angle<270 ) && bodyTexture.transform.localScale.y > 0)bodyTexture.transform.localScale = 
+		new Vector3(bodyTexture.transform.localScale.x, -bodyTexture.transform.localScale.y, bodyTexture.transform.localScale.z);
 		
-		if(( ((angle>0 && angle < 90 ) || angle>270)  ) && transform.localScale.y < 0)transform.localScale = 
-		new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
+		if( ((angle>0 && angle < 90 ) || angle>270)   && bodyTexture.transform.localScale.y < 0)bodyTexture.transform.localScale = 
+		new Vector3(bodyTexture.transform.localScale.x, -bodyTexture.transform.localScale.y, bodyTexture.transform.localScale.z);
 		
-		LookAtHeroLR ();
+
+		
 		return angle;
 	}
 
@@ -148,25 +178,29 @@ public class Enemy : MonoBehaviour
 	{
 
 
-			Game.g.Stun(this);
+		if(isBoundary)return;
+			getDmgAnimate ();
 			AudioManager.am.PlayEnemyHit();
 			health -= calculateDamage(dmg);
 
 
 		//Game.g.SpriteFlash(sr);//贴图闪烁
 	}
-
+	virtual public void UnStun(){
+		stunned=false;
+	}
 
 	virtual public float calculateDamage(float dmg){
 		//计算伤害，每个敌人都有自己的计算伤害方法，可以对这个方法进行拓展
 		//需要数值策划来调整计算公式。
-		dmg= Hero.r.attack+dmg-defense;
+		dmg= (Hero.r.attack+dmg)*(100-defense)/100;
 		if(dmg<0)dmg=0;
 		return dmg;
 	}
 	
 	virtual public void Die ()
 	{
+
 		isKilled=true;
 		//当敌人血量小于等于0时即死亡时调用
 		GameObject pe = Instantiate(deathParticleEffect, transform.position, Quaternion.identity);
@@ -185,9 +219,44 @@ public class Enemy : MonoBehaviour
 		if(col.gameObject.tag == "Hero")
 		{
 				Hero.r.TakeDamage(damage);
-				health -= 9999f ;
-				Debug.Log("撞到主角");
+				getDmgAnimate ();
+				//Debug.Log("撞到主角");
 		}
+	}
+
+	/*--------------------------
+			各种动画
+	----------------------------*/
+	
+	//治疗
+
+
+	//受伤
+		public void getDmgAnimate ()
+	{
+
+		flashColor=new Vector4(2f,1f,1f,1f);
+		//一秒钟后执行flashSr
+		StartCoroutine(flashSr());
+
+	}
+		public IEnumerator flashSr(){
+		Material mat=bodyTexture.GetComponent<RawImage>().material;
+		//定义一个全1的vector4
+		Vector4 v=new Vector4(1f,1f,1f,1f);
+		Vector4 v1 = flashColor;
+		//Debug.Log(mat.GetVector("_brightness"));
+		//获取用户定义的shader input要加上下划线
+
+		//如果当前亮度是全1的vector4，就设置为全1.5的vector4，否则设置为全1的vector4
+		if(mat.GetVector("_brightness")==v){
+			mat.SetVector("_brightness",v1);
+		}
+		stunned=true;
+		yield return new WaitForSeconds(0.1f);
+		stunned=false;
+		mat.SetVector("_brightness",v);
+
 	}
 
 

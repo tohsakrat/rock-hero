@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
 
 	public Rect spawnBoundry; //The edges of which the enemies can spawn on.
-
+	public int maxEnemies=100; //The maximum amount of enemies that can be alive at once.
 	public float timeBetweenEnemySpawn;
 	private float spawnTimer;
 
@@ -17,7 +17,10 @@ public class EnemySpawner : MonoBehaviour
 	}
 
 	void Update ()
-	{
+	{	
+		//如果敌人超过最大数量，直接返回
+		
+		if(Regedit.Enemies.Count>=maxEnemies)return;
 		spawnTimer += Time.deltaTime;
 
 		//Spawn an enemy every 'timeBetweenSpawn' seconds, if the game is running.

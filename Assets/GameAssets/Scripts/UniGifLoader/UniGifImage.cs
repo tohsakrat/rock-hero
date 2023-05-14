@@ -112,7 +112,8 @@ public class UniGifImage : MonoBehaviour
     }
 
     private void Start()
-    {
+    {   
+        gifResourcePath = Regedit.r.gifDir;
         if (m_rawImage == null)
         {
             m_rawImage = GetComponent<RawImage>();
@@ -224,19 +225,32 @@ public class UniGifImage : MonoBehaviour
         else
         {
             // from StreamingAssets
-            //path = Path.Combine("file:///" + Application.streamingAssetsPath, url);
             
-            path=Path.Combine(Application.dataPath+gifResourcePath,url);
+            if(Game.g.Debuging){
+                path = Path.Combine( Application.streamingAssetsPath, url);
+            }else{
+                path=Path.Combine(Application.dataPath+gifResourcePath,url);
+            }
             //Debug.Log(Application.dataPath+"Resource/Images");
         }
-
-        // Load file
-        UnityWebRequest request = UnityWebRequest.Get(path);//new UnityWebRequest(path, UnityWebRequest.kHttpVerbGET);
+        //如果全局请求字典没有当前path,
+        UnityWebRequest request;
+        if(!Regedit.r.RequestDic.ContainsKey(path)){
+           
+           
+           
+            request = UnityWebRequest.Get(path);//new UnityWebRequest(path, UnityWebRequest.kHttpVerbGET);}
+             request.SendWebRequest();
+            Regedit.r.RequestDic.Add(path,request);
+        }else{
+            request=Regedit.r.RequestDic[path];
+        }
 
         //Resources.Load(path) as UnityWebRequest;
-        request.SendWebRequest();
+
         while (!request.isDone)
-        {
+        {   
+            
             yield return null;
         }
 
@@ -253,8 +267,11 @@ public class UniGifImage : MonoBehaviour
         // Get GIF textures
         yield return StartCoroutine(
         UniGif.GetTextureListCoroutine(request.downloadHandler.data, (gifTexList, loopCount, width, height) =>
-        {
-            request.Dispose();
+        {  
+             
+
+
+          // request.Dispose();
             if (gifTexList != null)
             {   
                 m_gifTextureList = gifTexList;

@@ -1190,9 +1190,14 @@ MonoBehaviour:
   bodyTexture: {fileID: 0}
   angleOffset: 0
   colliderTriger: {fileID: 0}
+  verse: 0
+  rushSpan: 2
   stunned: 1
   isKilled: 0
+  velocity: {x: 0, y: 0, z: 0}
   angle: 0
+  timer: 0
+  flashColor: {x: 0, y: 0, z: 0, w: 0}
   dis: 0
 --- !u!212 &520809690
 SpriteRenderer:
@@ -1556,6 +1561,7 @@ MonoBehaviour:
   gameTime: 0
   gameTimeHighscore: 0
   gameActive: 0
+  Debuging: 1
   planetShield: {fileID: 0}
   turret: {fileID: 1835627214}
   BeatsPerMinute: 60
@@ -1578,7 +1584,8 @@ MonoBehaviour:
     y: -20
     width: 200
     height: 120
-  timeBetweenEnemySpawn: 0.5
+  maxEnemies: 100
+  timeBetweenEnemySpawn: 2
 --- !u!114 &637221776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2275,12 +2282,17 @@ MonoBehaviour:
   dropRate: 0.5
   deathParticleEffect: {fileID: 1822247329045900, guid: 35ffd295c80325c4da62b88495a64065,
     type: 3}
-  bodyTexture: {fileID: 0}
+  bodyTexture: {fileID: 1505283969}
   angleOffset: 0
   colliderTriger: {fileID: 0}
+  verse: 0
+  rushSpan: 2
   stunned: 1
   isKilled: 0
+  velocity: {x: 0, y: 0, z: 0}
   angle: 0
+  timer: 0
+  flashColor: {x: 0, y: 0, z: 0, w: 0}
   dis: 0
 --- !u!58 &848996223
 CircleCollider2D:
@@ -2587,9 +2599,14 @@ MonoBehaviour:
   bodyTexture: {fileID: 0}
   angleOffset: 0
   colliderTriger: {fileID: 0}
+  verse: 0
+  rushSpan: 2
   stunned: 1
   isKilled: 0
+  velocity: {x: 0, y: 0, z: 0}
   angle: 0
+  timer: 0
+  flashColor: {x: 0, y: 0, z: 0, w: 0}
   dis: 0
 --- !u!212 &909283009
 SpriteRenderer:
@@ -2771,7 +2788,7 @@ Behaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 947834502}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &947834506
 Camera:
   m_ObjectHideFlags: 0
@@ -2837,21 +2854,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 947834502}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32187365ced0c42219cde2b57c99b323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings:
-    threshold: 0.9
-    softKnee: 0.5
-    radius: 2
-    intensity: 1.3
-    highQuality: 1
-    antiFlicker: 0
-    dirtTexture: {fileID: 0}
-    dirtIntensity: 0
-  m_Shader: {fileID: 4800000, guid: e45d4f28262b04d10a075856ab5fdb5e, type: 3}
 --- !u!114 &947834510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2866,7 +2873,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lerpSpeed: 1
   menuCameraPos: {x: 0, y: 0, z: -10}
+<<<<<<< HEAD
   menuOrthoSize: 4
+=======
+  menuOrthoSize: 6
+>>>>>>> 34641031eb2f088536d008558dabe1d19f9eddcd
   gameOrthoSize: 25
 --- !u!1 &986491744
 GameObject:
@@ -3209,7 +3220,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7d4599e10b3a9ee4e888d824e800856c, type: 2}
+  - {fileID: 2100000, guid: 678343fd38a0eac4fba182f0616f36d7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3934,7 +3945,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1492621439
 Transform:
   m_ObjectHideFlags: 0
@@ -4055,7 +4066,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -5028,6 +5039,7 @@ MonoBehaviour:
   EnemyDir: Prefabs/Enemies
   PickupDir: Prefabs/Pickups
   SkillDir: Prefabs/Skills
+  gifDir: /StreamingAssets/
   EnemiesParent: {fileID: 822805520}
   ModelLayer: {fileID: 1925405045}
   ViewLayer: {fileID: 1728226191}
@@ -5050,7 +5062,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2093911447
 Transform:
   m_ObjectHideFlags: 0
@@ -5073,6 +5085,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4862403284673411072}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1001 &2097608900
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5715,6 +5728,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe8645cb5b05d7142b9b2ed68876a39b, type: 3}
+=======
+>>>>>>> 34641031eb2f088536d008558dabe1d19f9eddcd
 --- !u!1001 &4862403284673411072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5736,6 +5751,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416428206341241086, guid: c946fa5746cd9264a931aedc357a059e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1416428206341241086, guid: c946fa5746cd9264a931aedc357a059e,
         type: 3}
@@ -5855,7 +5875,7 @@ PrefabInstance:
     - target: {fileID: 4862403284011791464, guid: c946fa5746cd9264a931aedc357a059e,
         type: 3}
       propertyPath: attack
-      value: 40
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4862403284011791464, guid: c946fa5746cd9264a931aedc357a059e,
         type: 3}
@@ -5866,6 +5886,16 @@ PrefabInstance:
         type: 3}
       propertyPath: health
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4862403284011791464, guid: c946fa5746cd9264a931aedc357a059e,
+        type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4862403284011791464, guid: c946fa5746cd9264a931aedc357a059e,
+        type: 3}
+      propertyPath: mouseMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4862403284011791464, guid: c946fa5746cd9264a931aedc357a059e,
         type: 3}
@@ -5922,7 +5952,27 @@ PrefabInstance:
     - target: {fileID: 4862403284011791465, guid: c946fa5746cd9264a931aedc357a059e,
         type: 3}
       propertyPath: m_Mass
-      value: 8.194085
+      value: 17.466164
+      objectReference: {fileID: 0}
+    - target: {fileID: 4862403284011791465, guid: c946fa5746cd9264a931aedc357a059e,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4862403284011791466, guid: c946fa5746cd9264a931aedc357a059e,
+        type: 3}
+      propertyPath: m_Radius
+      value: 2.1044104
+      objectReference: {fileID: 0}
+    - target: {fileID: 4862403284011791466, guid: c946fa5746cd9264a931aedc357a059e,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0.7899232
+      objectReference: {fileID: 0}
+    - target: {fileID: 4862403284011791466, guid: c946fa5746cd9264a931aedc357a059e,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.058748797
       objectReference: {fileID: 0}
     - target: {fileID: 4862403284264215053, guid: c946fa5746cd9264a931aedc357a059e,
         type: 3}
@@ -5938,6 +5988,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917064225953659081, guid: c946fa5746cd9264a931aedc357a059e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.120452
       objectReference: {fileID: 0}
     - target: {fileID: 9041977148049359754, guid: c946fa5746cd9264a931aedc357a059e,
         type: 3}

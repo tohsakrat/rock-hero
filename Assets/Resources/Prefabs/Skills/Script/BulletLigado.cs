@@ -75,7 +75,7 @@ public class BulletLigado : Bullet
 		//如果打中敌人，就造成伤害
 		if(col.gameObject.tag == "Enemy")
 		{
-			col.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+			col.gameObject.GetComponent<EnemyCollider>().root.TakeDamage(damage);
 			SpawnParticleEffect();
 		}
 

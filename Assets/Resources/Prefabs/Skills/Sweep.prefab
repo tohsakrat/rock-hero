@@ -267,6 +267,7 @@ MonoBehaviour:
   damage: 5
   hitParticleEffect: {fileID: 1706759898638172, guid: a967b8c0d425dbf4db298df7943a4533,
     type: 3}
+  anchor: {fileID: 0}
   bulletSpeed: 100
   lifeTime: 1
   v: {x: 0, y: 0, z: 0}
