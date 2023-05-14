@@ -64,7 +64,7 @@ MonoBehaviour:
   name: 
   health: 30
   damage: 1
-  moveSpeed: 15
+  moveSpeed: 30
   defense: 10
   angleSpeed: 2
   lockAngle: 0
@@ -77,6 +77,7 @@ MonoBehaviour:
   angleOffset: 0
   colliderTriger: {fileID: 333531695859580387}
   verse: 0
+  rushSpan: 4
   stunned: 0
   isKilled: 0
   velocity: {x: 0, y: 0, z: 0}

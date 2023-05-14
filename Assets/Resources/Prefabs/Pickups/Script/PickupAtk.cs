@@ -6,16 +6,18 @@ public class PickupAtk : Pickup
 {
     // 捡起获得buff的道具模板
     
-	public void applyName(){
+	override public void applyName(){
 
 		//起名
 		if(name=="")name ="atc pickup";
+		if(commit=="")commit ="atc pickup";
+
 
 	}
 
 
 
-    public Hero.status item(){
+    override public Hero.status item(){
         //填写数值模板的小伙伴看这里
         //这里是道具的效果，可以自己定义
         //每个位置数字含义如下

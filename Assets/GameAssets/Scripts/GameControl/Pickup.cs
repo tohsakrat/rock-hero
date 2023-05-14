@@ -6,6 +6,7 @@ public class Pickup : MonoBehaviour
 {
 	public int health;
 	public string name;//名字
+	public string commit;//描述
 	public SpriteRenderer sr;//贴图对象
 	public Texture2D tx;//贴图素材
 	public float timeAlive;
@@ -46,6 +47,7 @@ public class Pickup : MonoBehaviour
 		//如果没起名，就用对象名作为名字
 		if(name == "")name = gameObject.name;
 	}
+
 	virtual public void saveItem(){
 		//如果没起名，就用对象名作为名字
 		        transform.parent = Bag.b.gameObject.transform;//加入背包    
@@ -106,7 +108,25 @@ public class Pickup : MonoBehaviour
 		//先随便写，回来改
 		return new GameObject();
 	}
+    virtual public Hero.status item(){
+        //填写数值模板的小伙伴看这里
+        //这里是道具的效果，可以自己定义
+        //每个位置数字含义如下
 
+		/*public float maxHealth;//生命上限
+		public float attack;//攻击力
+		public float BeatsPerMinute;//每分钟拍数
+		public float attackRate;//攻击速度，每拍打几下
+		public float moveSpeed;//移动速度
+		public float pickupRadius;//拾起半径
+		public float luck;//幸运值，影响掉落率
+		public float healthRecover;//生命恢复
+		public float healthSteal;//吸血率
+		public float bulletSpeed;//子弹速度，是一个倍率，用于乘以具体子弹的速度
+		public float bulletRange ;//射程*/
+
+        return new Hero.status(0,0,0,0,0,0,0,0,0,0,0);//攻击力提升2
+    }
 	/*
 	IEnumerator Shrink ()
 	{

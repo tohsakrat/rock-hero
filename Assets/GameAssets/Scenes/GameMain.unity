@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.01  
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -2873,11 +2873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lerpSpeed: 1
   menuCameraPos: {x: 0, y: 0, z: -10}
-<<<<<<< HEAD
-  menuOrthoSize: 4
-=======
   menuOrthoSize: 6
->>>>>>> 34641031eb2f088536d008558dabe1d19f9eddcd
   gameOrthoSize: 25
 --- !u!1 &986491744
 GameObject:
@@ -5085,7 +5081,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4862403284673411072}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
 --- !u!1001 &2097608900
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5728,8 +5723,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe8645cb5b05d7142b9b2ed68876a39b, type: 3}
-=======
->>>>>>> 34641031eb2f088536d008558dabe1d19f9eddcd
 --- !u!1001 &4862403284673411072
 PrefabInstance:
   m_ObjectHideFlags: 0

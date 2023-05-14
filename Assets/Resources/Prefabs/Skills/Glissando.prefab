@@ -203,7 +203,7 @@ MonoBehaviour:
   name: 
   canUse: 0
   bulletPrefab: {fileID: 1470232904424208}
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: f8bd9294d3132cd469d01ebe817ae057, type: 3}
   Beats: 2
 --- !u!114 &8959627640718918997
 MonoBehaviour:

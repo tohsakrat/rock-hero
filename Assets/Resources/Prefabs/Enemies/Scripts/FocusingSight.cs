@@ -13,6 +13,7 @@ public class FocusingSight : Enemy
         if(father==null){
             Destroy(gameObject);
         }
+        base.moveRule();
     }
 
 
