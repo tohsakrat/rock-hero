@@ -10,13 +10,14 @@ public class UI : MonoBehaviour
 	public GameObject CreditsUI;
 	public GameObject CharacterChooseUI;
 	public GameObject DifficultyUI;
+	public GameObject ShopUI;
 	public GameObject gameUI;
 	public GameObject gameOverUI;
 	public Game gameCtrl;
 
 	//Game UI
 	public Text timeElapsed;
-	public Slider planetHealthBar;
+	public Image HealthBar;
 
 	//Game Over UI
 	public Text goDefendTime;
@@ -28,8 +29,8 @@ public class UI : MonoBehaviour
 
 	void Start ()
 	{
-		planetHealthBar.maxValue = (int)Hero.r.maxHealth;
-		planetHealthBar.value = (int)Hero.r.health;
+		//HealthBar.maxValue = (int)Hero.r.maxHealth;
+		//HealthBar.value = (int)Hero.r.health;
 		AudioManager.am.PlayManual();
 	}
 
@@ -44,6 +45,7 @@ public class UI : MonoBehaviour
 		gameCtrl.gameActive=false;
 	}
 	public void onResume(){
+		ShopUI.SetActive(false);
 		gameCtrl.gameActive=true;
 	}
 	//On the menu screen, when the "Play" button gets pressed.
@@ -88,6 +90,19 @@ public class UI : MonoBehaviour
 	{
 		menuUI.SetActive(false);
 		settingUI.SetActive(true);
+	}
+
+	//应用并返回
+	public void ApplyReturn()
+	{
+		settingUI.SetActive(false);
+	}
+
+	//打开商店
+	public void OpenShop()
+	{
+		gameCtrl.gameActive = false;
+		ShopUI.SetActive(true);
 	}
 
 	//点击返回主菜单
@@ -157,14 +172,16 @@ public class UI : MonoBehaviour
 	//Sets the value of the planet health bar. Called when the planet takes damage.
 	public void SetPlanetHealthBarValue (int value)
 	{
-		planetHealthBar.value = value;
+		float Health;
+		Health = value / (int)Hero.r.maxHealth;
+		HealthBar.fillAmount = Health;
 		StartCoroutine(PlanetHealthBarFlash());
 	}
 
 	//Flashes the health bar red quickly.
 	IEnumerator PlanetHealthBarFlash ()
 	{
-		Image fill = planetHealthBar.transform.Find("Fill Area/Fill").GetComponent<Image>();
+		Image fill = HealthBar.transform.Find("Fill Area/Fill").GetComponent<Image>();
 
 		if(fill.color != Color.red)
 		{
