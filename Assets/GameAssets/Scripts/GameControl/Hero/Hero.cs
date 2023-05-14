@@ -58,8 +58,8 @@ public class Hero : MonoBehaviour
 	public bool canHoldFire; //是否可以射击，用来阻塞技能
    	public float timer = 0;//计时器
    	public int beatsLeft = 0;//剩余拍数
-	public  List<Skill> Skills= new List<Skill>();//技能列表
-	public  List<Pickup> items= new List<Pickup>();//道具列表
+	public  List<Skill> Skills= new List<Skill>();//持有技能列表
+	public  List<Pickup> items= new List<Pickup>();//持有道具列表
 	
 
 	//待重构，这个数据不应该放在这里，鼠标位置
