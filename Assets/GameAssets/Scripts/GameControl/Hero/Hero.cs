@@ -180,6 +180,7 @@ public class Hero : MonoBehaviour
 				
 			timer=0;
 			beatsLeft--;
+			AudioManager.am.Beat();
 			if(beatsLeft<=0)Shoot();
 		}
 		}
@@ -244,7 +245,7 @@ public class Hero : MonoBehaviour
 		//每次触发，随机tigger一个skill中的技能
 		Skill s=Skills[Random.Range(0,Skills.Count)];
 		//Debug.Log(s);
-		s.trigger();
+		s.triggerWithAudio();
 		beatsLeft=s.Beats;
 
 	}

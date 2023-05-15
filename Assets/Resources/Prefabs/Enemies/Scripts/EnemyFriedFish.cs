@@ -8,6 +8,11 @@ public class EnemyFriedFish : Enemy
     public GameObject missileSample;//导弹样本
     
     public GameObject focusingSight;//瞄准准星
+    
+    public GameObject readyTexture;//准备发射时的贴图
+    public GameObject normalTexture;//正常时的贴图
+    
+
     public float shootSpan;//射击间隔
     public float safeRange;//射击间隔
     public float fishDis;//临时变量，用于记录敌人的距离
@@ -35,9 +40,7 @@ public class EnemyFriedFish : Enemy
     }
     
     override public void moveRule(){
-        if(!canShoot && !isFocusing){missile.SetActive(false);//如果可以发射，就隐藏导弹
-        }else{ missile.SetActive(true);}//否则显示导弹
-        
+
         //如果正在发射，就不移动。
         if(isShooting)return;
         if(canShoot){
@@ -60,6 +63,8 @@ public class EnemyFriedFish : Enemy
 			LookAtHeroAngle();//始终面向玩家
 		}
 
+
+
     }
 
     public IEnumerator shootEnumerator(){
@@ -67,9 +72,13 @@ public class EnemyFriedFish : Enemy
         //瞄准阶段
         canShoot=false;
         isFocusing=true;
+
+        readyTexture.SetActive(true);
+        
+
         GameObject missile = Instantiate(missileSample, missileSample.transform.position, missileSample.transform.rotation,missileSample.transform.parent.transform);
         missile.SetActive(true);
-
+        //隐藏导弹贴图（rawImage）
         //在主角的位置创建一个正放的准星
         GameObject focusingMe = Instantiate(focusingSight, Hero.r.transform.position, Quaternion.identity,Regedit.r.EnemiesParent.transform);
         focusingMe.SetActive(true);
@@ -78,8 +87,11 @@ public class EnemyFriedFish : Enemy
         yield return new WaitForSeconds(focusingTime);//瞄准用时三秒
 
         //发射阶段
+        
         isFocusing=false;
         isShooting=true;
+         readyTexture.SetActive(false);
+        normalTexture.SetActive(true);
         focusingMe.GetComponent<FocusingSight>().stunned=true;//准星不再移动
         EnemyTomato fryTomato = missile.GetComponent<EnemyTomato>();//获取导弹的脚本
 

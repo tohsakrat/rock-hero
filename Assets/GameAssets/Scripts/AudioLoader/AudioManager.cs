@@ -18,14 +18,25 @@ public class AudioManager : MonoBehaviour
 	public AudioClip enemyHit;
 	public AudioClip buttonHover;
 	public AudioClip buttonClick;
+	public AudioClip beat;
 	
 	//Audio Source
 	public AudioSource audioSource;
+	public AudioSource audioSource2;
 
 	public static AudioManager am;
+
 	void Awake () { am = this; }
 
-	//Plays the "shoot" sound effect, from the audio source.
+	public void Play (AudioClip As)
+	{
+		audioSource2.PlayOneShot(As);
+	}
+	public void Beat ()
+	{
+		audioSource2.PlayOneShot(beat);
+	}
+
 
 
 	public void PlayManual ()
@@ -33,18 +44,23 @@ public class AudioManager : MonoBehaviour
 
 		//随机播放一首非战斗bgm
 		
-		int a = Random.Range(0,100);
-		if(a>50){audioSource.PlayOneShot(bgmNormal1);}else{
-			audioSource.PlayOneShot(bgmNormal2);
-		}
+		audioSource.PlayOneShot(bgmManual);
 		
 	}
 
 	//Plays the "getPickup" sound effect, from the audio source.
 	public void PlayNormal ()
 	{
+		//先停止正在播放的bgm 再换成normal音乐
+		audioSource.Stop();
 		audioSource.PlayOneShot(bgmNormal1);
+		Debug.Log("play normal");
+		
+
+
 	}
+
+
 
 	//Plays the "enemyDeath" sound effect, from the audio source.
 	public void PlayBattle ()

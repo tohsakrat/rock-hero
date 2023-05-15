@@ -37,7 +37,7 @@ public class Game : MonoBehaviour
 			gameTime += Time.deltaTime;
 
 
-		
+		/*
 		//enemy父母对象下的所有子对象为Regedir.r.EnemiesParent.transform.GetComponentsInChildren<Transform>(true)
 		List <Transform> enemies = new List<Transform>(Regedit.r.EnemiesParent.transform.GetComponentsInChildren<Transform>(true));
 		//把enemies按照y轴排序
@@ -50,7 +50,7 @@ public class Game : MonoBehaviour
 		for(int i = 0; i < enemies.Count; i++)
 		{
 			enemies[i].SetSiblingIndex(i);
-		}
+		}*/
 
 
 		
