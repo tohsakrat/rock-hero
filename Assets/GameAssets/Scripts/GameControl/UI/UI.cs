@@ -51,7 +51,6 @@ public class UI : MonoBehaviour
 	//On the menu screen, when the "Play" button gets pressed.
 	public void OnPlayButton ()
 	{
-		AudioManager.am.PlayNormal ();
 		CameraController.c.TransitionToGameView();
 		menuUI.SetActive(false);
 		settingUI.SetActive(false);

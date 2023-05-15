@@ -11,9 +11,10 @@ public class CameraController : MonoBehaviour
 	public Vector3 menuCameraPos;//回到菜单时镜头位置
 	public float menuOrthoSize;//回到菜单时镜头缩放比
 	public float gameOrthoSize;//游戏时镜头缩放比
-
+	
 	public static CameraController c;
 
+	public bool transformedToGameView;//是否已经开场
 
 	void Awake () { 
 		//设置全局变量Comeracontroller.c
@@ -81,6 +82,8 @@ public class CameraController : MonoBehaviour
 	//镜头移动到主角，然后放大视野
 	public void TransitionToGameView ()
 	{
+		if(transformedToGameView)return;
+		transformedToGameView = true;
 		StartCoroutine(gv());
 	}
 
@@ -110,8 +113,8 @@ public class CameraController : MonoBehaviour
 
 			yield return null;
 		}
-
-		//案例在这里写得不太好，有空应该帮他改一下。camera属于视图层，game属于控制层，这里的逻辑应该放在game里面。
 		Game.g.StartGame();
+		//案例在这里写得不太好，有空应该帮他改一下。camera属于视图层，game属于控制层，这里的逻辑应该放在game里面。
+		
 	}
 }
