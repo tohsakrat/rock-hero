@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour 
 {
-	public int health;
+	public int health = 5;
 	public string name;//名字
 	public string commit;//描述
 	public SpriteRenderer sr;//贴图对象
-	public Texture2D tx;//贴图素材
-	public float timeAlive;
+	public Sprite sp;//贴图素材
+	public float timeAlive = 5;
 	public bool isItem;
 
 	public void Start(){
 		Regedit.Pickups.Add(this);//注册当前补给到全局list中
 		if(sr==null)sr=gameObject.GetComponent<SpriteRenderer>();//如果贴图未绑定，则绑定自己
+		sp=sr.sprite;//获取贴图素材
 
 	}
 	public void Awake(){
