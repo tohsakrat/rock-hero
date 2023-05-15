@@ -65,6 +65,7 @@ public class Game : MonoBehaviour
 		UI.ui.SetGameUI();
 		Camera.main.GetComponent<CameraController>().TransitionToGameView();
 		
+		AudioManager.am.PlayNormal ();
 	}
 
 	//Called when the planet's health reaches 0. Ends the game.

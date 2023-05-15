@@ -205,6 +205,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1470232904424208}
   icon: {fileID: 21300000, guid: f8bd9294d3132cd469d01ebe817ae057, type: 3}
   Beats: 2
+  skillAudio: {fileID: 8300000, guid: 7c8d7a7749e9fb145bd439bca896c610, type: 3}
 --- !u!114 &8959627640718918997
 MonoBehaviour:
   m_ObjectHideFlags: 0

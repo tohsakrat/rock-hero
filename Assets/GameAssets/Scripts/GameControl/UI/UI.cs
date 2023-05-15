@@ -56,8 +56,7 @@ public class UI : MonoBehaviour
 		settingUI.SetActive(false);
 		CreditsUI.SetActive(false);
 		CharacterChooseUI.SetActive(false);
-
-		AudioManager.am.PlayBattle();
+		
 	}
 
 	//角色选择UI

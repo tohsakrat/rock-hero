@@ -14,6 +14,7 @@ public class Skill : MonoBehaviour
     public  Sprite icon;//技能图标
     public  int Beats;//节拍数
 
+	public AudioClip skillAudio;
 	public void Start(){}
 	public void Awake(){
         
@@ -26,6 +27,14 @@ public class Skill : MonoBehaviour
 		if(name == "")name = gameObject.name;
 	}
 
+    virtual public void triggerWithAudio(){
+        //播放音效
+        if(skillAudio != null){
+            AudioManager.am.Play(skillAudio);
+        }
+        //触发技能
+        trigger();
+    }
     virtual public void trigger(){
          
 
@@ -34,9 +43,6 @@ public class Skill : MonoBehaviour
             bullet.SetActive(true);
 
 
-           // Vector3 dir1 = ((mouseDetection.pos- Hero.r.transform.position).normalized) ;
-         //   dir1 *=  (bulletSpeed * Random.Range(0.8f, 1.1f));
-         //   bullet1.GetComponent<Rigidbody2D>().velocity = dir1;
 
 				
 			}

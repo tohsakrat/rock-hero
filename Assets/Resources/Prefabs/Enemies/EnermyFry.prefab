@@ -137,6 +137,8 @@ MonoBehaviour:
   missileSample: {fileID: 2050422986255174257}
   focusingSight: {fileID: 1129669299386006, guid: c44011f5746790244a0ebb4220873c79,
     type: 3}
+  readyTexture: {fileID: 6914904914161720879}
+  normalTexture: {fileID: 6058812488470072545}
   shootSpan: 0
   safeRange: 30
   fishDis: 0
@@ -1030,8 +1032,8 @@ Transform:
   m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6305324938837509722}
   - {fileID: 3134029665499904291}
+  - {fileID: 6305324938837509722}
   m_Father: {fileID: 3251030856277117004}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1394,7 +1396,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6305324938837509722}
   m_Layer: 0
-  m_Name: "\u7784\u51C6\u6001"
+  m_Name: "\u5E38\u6001"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1417,7 +1419,7 @@ Transform:
   - {fileID: 2243453392842593112}
   - {fileID: 5916907302432162947}
   m_Father: {fileID: 7117975465331543341}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6403533052350664252
 GameObject:
@@ -1566,7 +1568,7 @@ GameObject:
   - component: {fileID: 3134029665499904291}
   - component: {fileID: 2930052590405673723}
   m_Layer: 0
-  m_Name: "\u5E38\u6001"
+  m_Name: "\u88C5\u586B\u6001"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1589,7 +1591,7 @@ Transform:
   - {fileID: 3245074046536692489}
   - {fileID: 2435547406689811712}
   m_Father: {fileID: 7117975465331543341}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2930052590405673723
 MonoBehaviour:
