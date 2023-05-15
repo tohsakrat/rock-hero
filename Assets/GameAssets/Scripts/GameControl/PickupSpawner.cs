@@ -35,6 +35,7 @@ public class PickupSpawner : MonoBehaviour
 	void SpawnPickup ()
 	{
 		GameObject pickup = Instantiate(GetRandomPickup(), GetRandomPositon(), Quaternion.identity);
+		pickup.SetActive(true);
 	}
 
 	//Returns a random positon behind the player.
@@ -47,13 +48,21 @@ public class PickupSpawner : MonoBehaviour
 	//Returns a random pickup prefab.
 	GameObject GetRandomPickup ()
 	{
-		float ranNum = Random.Range(1, 4);
 
-		if(ranNum == 1)
-			return speedFirePrefab;
-		else if(ranNum == 2)
-			return planetShieldPrefab;
-		else
-			return turretPrefab;
+		Debug.Log("随机抽取道具");
+		//在全局道具图鉴字典里随机抽一个元素返回
+		//全局道具图鉴为Regedit.r.PickupDic : Dictionary<string,GameObject>();
+		//下一行正式开始代码
+		 List<string> Keys = new  List<string>();//获取所有key
+
+		foreach (var item in Regedit.r.PickupDic)
+		{
+			Keys.Add(item.Key);
+		}
+
+		 int index = Random.Range(0,Keys.Count);//随机抽一个key
+		 string key = Keys[index];//获取key
+		 Debug.Log(key);
+		 return Regedit.r.PickupDic[key];//返回对应的道具
 	}
 }

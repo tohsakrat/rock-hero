@@ -160,7 +160,27 @@ public class Hero : MonoBehaviour
 
 		if(Game.g.gameActive){
 		
+		//buffedStatus为bag里所有道具的buff叠加之和，即 每个item()方法返回值之和
+		buffedStatus=new status(0,0,0,0,0,0,0,0,0,0,0);
+		foreach(Pickup p in items){
+			buffedStatus=buffedStatus+p.item();
+		}
+		
+
+
 		currentStatus=baseStatus+customPoints+buffedStatus;
+		//把currentStatus各项值反向赋值给面板
+		maxHealth=currentStatus.maxHealth;
+		attack=currentStatus.attack;
+		BeatsPerMinute=currentStatus.BeatsPerMinute;
+		attackRate=currentStatus.attackRate;
+		moveSpeed=currentStatus.moveSpeed;
+		pickupRadius=currentStatus.pickupRadius;
+		luck=currentStatus.luck;
+		healthRecover=currentStatus.healthRecover;
+		healthSteal=currentStatus.healthSteal;
+		bulletSpeed=currentStatus.bulletSpeed;
+		bulletRange=currentStatus.bulletRange;
 
 		transform.position= new Vector3(transform.position.x,transform.position.y,0);
 
