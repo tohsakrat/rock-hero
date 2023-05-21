@@ -47,27 +47,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f1547603443cc34da1698aa8aeb87c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  deathParticleEffect: {fileID: 0}
-  healParticleEffect: {fileID: 0}
+  health: 100
+  deathParticleEffect: {fileID: 1822247329045900, guid: 35ffd295c80325c4da62b88495a64065,
+    type: 3}
+  healParticleEffect: {fileID: 1822247329045900, guid: 9ad3bd6556248e74687f590856afa1d7,
+    type: 3}
   flashColor: {x: 0, y: 0, z: 0, w: 0}
-  mat: {fileID: 2100000, guid: 0a7adcccfee095843b426692f8deac11, type: 2}
-  maxHealth: 10
-  attack: 0
-  BeatsPerMinute: 0
-  attackRate: 0.1
-  moveSpeed: 5
+  mat: {fileID: 2100000, guid: 6a041e1ad942c5b449c1355f920c50fa, type: 2}
+  maxHealth: 100
+  attack: 10
+  BeatsPerMinute: 72
+  attackRate: 1
+  moveSpeed: 25
   pickupRadius: 0
   luck: 0
   healthRecover: 0
   healthSteal: 0
-  bulletSpeed: 200
-  bulletRange: 0
+  bulletSpeed: 1
+  bulletRange: 1000
+  mouseMode: 1
   canMove: 0
-  canHoldFire: 0
+  canHoldFire: 1
   timer: 0
   beatsLeft: 0
   Skills: []
+  playingSkills: []
+  playingSkillID: 0
   items: []
   mousePositionWorld: {fileID: 0}
 --- !u!58 &4862403284011791466
@@ -98,7 +103,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 1
-  m_Mass: 14.685752
+  m_Mass: 8.194085
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0

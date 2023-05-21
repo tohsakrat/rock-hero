@@ -38,6 +38,7 @@ public class Hero : MonoBehaviour
 			move
 		}
 
+
 		heroState state=heroState.idle;
 
 	[Header("设置")]
@@ -59,8 +60,17 @@ public class Hero : MonoBehaviour
    	public float timer = 0;//计时器
    	public int beatsLeft = 0;//剩余拍数
 	public  List<Skill> Skills= new List<Skill>();//持有技能列表
+	public  List<Skill> playingSkills= new List<Skill>();//正在播放的音轨
+	public  int playingSkillID= 0;//正在播放的具体技能
 	public  List<Pickup> items= new List<Pickup>();//持有道具列表
-	
+	public enum grade{
+		//枚举属性，单次判定成绩
+		miss,
+		great,
+		perfect,
+		noGrade
+	}
+	public  List<grade> nowGrades= new List<grade>();//正在播放的音轨中取得的成绩
 
 	//待重构，这个数据不应该放在这里，鼠标位置
 	public GameObject mousePositionWorld;
@@ -136,7 +146,10 @@ public class Hero : MonoBehaviour
 		customPoints=new status(0,0,0,0,0,0,0,0,0,0,0);
 		buffedStatus=new status(0,0,0,0,0,0,0,0,0,0,0);
 
-
+		//给nowGrades添加八个元素，值都是noGrade
+		for(int i=0;i<8;i++){
+			nowGrades.Add(grade.noGrade);
+		}
 
 		r = this; 
 		//技能列表，现在只是把技能注册表里的所有技能都加进来了
@@ -144,6 +157,12 @@ public class Hero : MonoBehaviour
 		foreach (KeyValuePair<string, Skill> kvp in Regedit.r.SkillDic)
 		{
 			Skills.Add(kvp.Value);
+		}
+
+		
+		//随机填充playingSkills，直到ta的元素数量到达8
+		while(playingSkills.Count<9){
+			playingSkills.Add(Skills[Random.Range(0,Skills.Count)]);
 		}
 		//打印skill列表
 		Debug.Log("主角skill列表");
@@ -157,56 +176,43 @@ public class Hero : MonoBehaviour
 	void Update ()
 	{	
 
-
-		if(Game.g.gameActive){
-		
-		//buffedStatus为bag里所有道具的buff叠加之和，即 每个item()方法返回值之和
-		buffedStatus=new status(0,0,0,0,0,0,0,0,0,0,0);
-		foreach(Pickup p in items){
-			buffedStatus=buffedStatus+p.item();
+		if(!Game.g.gameActive){
+			return;
 		}
+
 		
+		timer += Time.deltaTime;
 
+		updateStatus();
+	
 
-		currentStatus=baseStatus+customPoints+buffedStatus;
-		//把currentStatus各项值反向赋值给面板
-		maxHealth=currentStatus.maxHealth;
-		attack=currentStatus.attack;
-		BeatsPerMinute=currentStatus.BeatsPerMinute;
-		attackRate=currentStatus.attackRate;
-		moveSpeed=currentStatus.moveSpeed;
-		pickupRadius=currentStatus.pickupRadius;
-		luck=currentStatus.luck;
-		healthRecover=currentStatus.healthRecover;
-		healthSteal=currentStatus.healthSteal;
-		bulletSpeed=currentStatus.bulletSpeed;
-		bulletRange=currentStatus.bulletRange;
-
-		transform.position= new Vector3(transform.position.x,transform.position.y,0);
+		
 
 		if(canMove){
 			//摇滚英雄不是飞机，不用掉头
 			//RotateHero();
-
 			movHero();
 		}
 
-		timer += Time.deltaTime;
-		if(canHoldFire){
+
 		
-		if(
-			timer>60f/BeatsPerMinute
-			){
-				
-			timer=0;
-			beatsLeft--;
-			AudioManager.am.Beat();
-			if(beatsLeft<=0)Shoot();
-		}
+		if(canHoldFire){
+
+			//鼠标操作判定，有时间补充键盘的
+	
+
+			//步进鼓机
+			if(timer>60f/BeatsPerMinute){
+				timer=0;
+				beatsLeft--;
+				AudioManager.am.Beat();
+				if(beatsLeft<=0)Shoot();
+			}
+			judgeG();
 		}
 
 
-		}
+		
 
 
 		
@@ -216,7 +222,7 @@ public class Hero : MonoBehaviour
 	/*--------------------------
 			主角移动与旋转
 	----------------------------*/
-
+	
 	void RotateHero ()
 	{	Vector3 dirPosition = mousePositionWorld.transform.position;
 		dirPosition.z=transform.position.z;
@@ -251,6 +257,8 @@ public class Hero : MonoBehaviour
 			}
 
 		}
+
+		transform.position= new Vector3(transform.position.x,transform.position.y,0);
 		
 	}
 
@@ -263,14 +271,85 @@ public class Hero : MonoBehaviour
 		//打印
 		//Debug.Log("主角射击");
 		//每次触发，随机tigger一个skill中的技能
-		Skill s=Skills[Random.Range(0,Skills.Count)];
-		//Debug.Log(s);
+		Skill s=playingSkills[playingSkillID];
+		
 		s.triggerWithAudio();
 		beatsLeft=s.Beats;
 
+		playingSkillID++;
+		if(playingSkillID>=playingSkills.Count-1){
+			playingSkillID=0;
+			//nowGrades List全部是设置为无成绩
+			//nowGrades长度
+			for(int i=0;i<nowGrades.Count;i++){
+				nowGrades[i]=grade.noGrade;
+				if(i==0)nowGrades[i]=nowGrades[nowGrades.Count-1];
+			}
+
+		}
 	}
+	//判定分数
+	void judgeG(){
 
 
+
+
+		if (Input.GetMouseButtonDown(0)){
+			int i;
+			Debug.Log("判定分数");
+			if(timer<60f/BeatsPerMinute/2){
+				i=playingSkillID;
+
+			}else{
+				i=playingSkillID+1;
+				
+			}
+
+			if(nowGrades[i]!=grade.noGrade)return;//如果已经判定过了，就不要再判定了
+
+			if(timer<60f/BeatsPerMinute/10 || timer>60f/BeatsPerMinute/10*9){
+				//成绩完美,赋值perfect
+				nowGrades[i]=grade.perfect;
+
+			}else if(timer<60f/BeatsPerMinute/5*2 || timer>60f/BeatsPerMinute/5*3){
+				//成绩良好,赋值great
+				nowGrades[i]=grade.great;
+			}else{
+				//成绩不好,赋值miss
+				nowGrades[i]=grade.miss;
+			}
+			
+			Debug.Log(nowGrades[i]);
+
+			}
+
+		if(timer>60f/BeatsPerMinute/2){
+			if(nowGrades[playingSkillID]==grade.noGrade)nowGrades[playingSkillID]=grade.miss;
+		}
+
+
+	}
+	public void updateStatus(){
+		//把currentStatus各项值反向赋值给面板
+		//buffedStatus为bag里所有道具的buff叠加之和，即 每个item()方法返回值之和
+
+		buffedStatus=new status(0,0,0,0,0,0,0,0,0,0,0);
+		foreach(Pickup p in items){
+			buffedStatus=buffedStatus+p.item();
+		}
+		currentStatus=baseStatus+customPoints+buffedStatus;
+		maxHealth=currentStatus.maxHealth;
+		attack=currentStatus.attack;
+		BeatsPerMinute=currentStatus.BeatsPerMinute;
+		attackRate=currentStatus.attackRate;
+		moveSpeed=currentStatus.moveSpeed;
+		pickupRadius=currentStatus.pickupRadius;
+		luck=currentStatus.luck;
+		healthRecover=currentStatus.healthRecover;
+		healthSteal=currentStatus.healthSteal;
+		bulletSpeed=currentStatus.bulletSpeed;
+		bulletRange=currentStatus.bulletRange;
+	}
 
 	//受到伤害
 	public void TakeDamage (float dmg)

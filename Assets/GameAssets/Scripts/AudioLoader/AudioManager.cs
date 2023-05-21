@@ -28,6 +28,16 @@ public class AudioManager : MonoBehaviour
 
 	void Awake () { am = this; }
 
+	void Update () 
+	{ 
+		//audiosource的bpm随着主角bpm变化
+		if(!Game.g.gameActive){return;}
+		if(Hero.r==null){return;}
+		audioSource.pitch = Hero.r.currentStatus.BeatsPerMinute/Hero.r.currentStatus.BeatsPerMinute;
+		audioSource2.pitch = Hero.r.currentStatus.BeatsPerMinute/Hero.r.currentStatus.BeatsPerMinute;
+	}
+
+
 	public void Play (AudioClip As)
 	{
 		audioSource2.PlayOneShot(As);
@@ -37,17 +47,31 @@ public class AudioManager : MonoBehaviour
 		audioSource2.PlayOneShot(beat);
 	}
 
+	public void Pause ()
+	{
+		audioSource.Pause();
+	}
 
-
+	public void Resume()
+	{
+		audioSource.UnPause();
+	}
 	public void PlayManual ()
 	{
 
 		//随机播放一首非战斗bgm
-		
+		audioSource.Stop();
 		audioSource.PlayOneShot(bgmManual);
 		
 	}
-
+	public void PlayBoss ()
+	{
+		audioSource.Stop();
+		audioSource.PlayOneShot( bgmBoss);
+		//音量增加
+		audioSource.volume = 0.5f;
+		
+	}
 	//Plays the "getPickup" sound effect, from the audio source.
 	public void PlayNormal ()
 	{
@@ -64,15 +88,11 @@ public class AudioManager : MonoBehaviour
 
 	//Plays the "enemyDeath" sound effect, from the audio source.
 	public void PlayBattle ()
-	{
+	{audioSource.Stop();
 		audioSource.PlayOneShot(bgmBattle);
 	}
 
 	//Plays the "enemyHit" sound effect, from the audio source.
-	public void PlayBoss ()
-	{
-		audioSource.PlayOneShot(bgmBoss);
-	}
 
 
 

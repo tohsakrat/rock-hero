@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour 
 {
-
+	public static EnemySpawner s; //A reference to this script instance.
 	public Rect spawnBoundry; //The edges of which the enemies can spawn on.
 	public int maxEnemies=100; //The maximum amount of enemies that can be alive at once.
 	public float timeBetweenEnemySpawn;
@@ -13,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
 
 	void Start ()
 	{
-
+		s=this;
 	}
 
 	void Update ()

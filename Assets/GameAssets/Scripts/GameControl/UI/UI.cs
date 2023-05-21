@@ -43,10 +43,12 @@ public class UI : MonoBehaviour
 	}
 	public void onPause(){
 		gameCtrl.gameActive=false;
+		AudioManager.am.Pause();
 	}
 	public void onResume(){
 		ShopUI.SetActive(false);
 		gameCtrl.gameActive=true;
+		AudioManager.am.Resume();
 	}
 	//On the menu screen, when the "Play" button gets pressed.
 	public void OnPlayButton ()
@@ -100,8 +102,10 @@ public class UI : MonoBehaviour
 	//打开商店
 	public void OpenShop()
 	{
-		gameCtrl.gameActive = false;
+		//暂停音频
+		
 		ShopUI.SetActive(true);
+		onPause();
 	}
 
 	//点击返回主菜单
@@ -174,14 +178,14 @@ public class UI : MonoBehaviour
 		float Health;
 		Health = value / (int)Hero.r.maxHealth;
 		HealthBar.fillAmount = Health;
-		StartCoroutine(PlanetHealthBarFlash());
+		//StartCoroutine(PlanetHealthBarFlash());
 	}
 
 	//Flashes the health bar red quickly.
-	IEnumerator PlanetHealthBarFlash ()
+	/*IEnumerator PlanetHealthBarFlash ()
 	{
-		Image fill = HealthBar.transform.Find("Fill Area/Fill").GetComponent<Image>();
-
+		Image fill = HealthBar.transform.Find("FillArea/Fill").GetComponent<Image>();
+		
 		if(fill.color != Color.red)
 		{
 			Color dc = fill.color;
@@ -191,7 +195,8 @@ public class UI : MonoBehaviour
 
 			fill.color = dc;
 		}
-	}
+		yield return null;
+	}*/
 
 	//Sets the text that shows how long the game has been going for.
 	void SetTimeElapsed ()

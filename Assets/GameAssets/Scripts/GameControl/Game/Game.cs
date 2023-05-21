@@ -15,9 +15,11 @@ public class Game : MonoBehaviour
 	public float BeatsPerMinute;//每分钟拍数
 	public float attackRate;//攻击速度，每拍打几下
 	public static Game g;
+
+	public bool isBoss;
 	
 
-	void Start ()
+	void Awake ()
 	{
 		
 		g = this;
@@ -35,6 +37,21 @@ public class Game : MonoBehaviour
 
 		if(gameActive)
 			gameTime += Time.deltaTime;
+
+		//游戏生存时间超过一分钟，进入boss战，对所有场上敌人造成9999伤害清场
+		/*
+		if(gameTime >  30 && !isBoss)
+		{	
+			g.gameActive = false;
+			EnemySpawner.s.maxEnemies=0;
+			isBoss = true;
+			//对所有场上敌人造成9999伤害清场
+			foreach(Enemy enemy in Regedit.r.EnemiesParent.GetComponentsInChildren<Enemy>())
+			{
+				enemy.TakeDamage(9999);
+			}
+			AudioManager.am.PlayBoss();
+		}*/
 
 
 		

@@ -64,7 +64,8 @@ public class UniGifImage : MonoBehaviour
     private bool m_outputDebugLog;
     public string path;//不用设置，纯粹为了调试好看
     // Decoded GIF texture list
-    private List<UniGif.GifTexture> m_gifTextureList;
+    public List<UniGif.GifTexture> m_gifTextureList;
+    public int m_gifTextureListLength;
     // Delay time
     private float m_delayTime;
     // Texture index
@@ -275,6 +276,7 @@ public class UniGifImage : MonoBehaviour
             if (gifTexList != null)
             {   
                 m_gifTextureList = gifTexList;
+                 m_gifTextureListLength=gifTexList.Count;
                 this.loopCount = loopCount;
                 this.width = width;
                 this.height = height;
