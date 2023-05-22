@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
 	public float gameOrthoSize;//游戏时镜头缩放比
 	
 	public static CameraController c;
-
+	public delegate void MyDelegateVoid();
 	public bool transformedToGameView;//是否已经开场
 
 	void Awake () { 
@@ -80,32 +80,35 @@ public class CameraController : MonoBehaviour
 
 	//开场镜头api
 	//镜头移动到主角，然后放大视野
-	public void TransitionToGameView ()
+	public void TransitionToGameView (MyDelegateVoid callback = null)
 	{
-		if(transformedToGameView)return;
-		transformedToGameView = true;
-		StartCoroutine(gv());
+		//Debug.Log("镜头移动到主角，然后放大视野");
+		//if(transformedToGameView)return;
+		StartCoroutine(gv(callback));
 	}
 
 	//开场镜头协程
-	IEnumerator gv ()
+	IEnumerator gv (MyDelegateVoid callback = null)
 	{
 		//镜头移动到主角
-		while(Camera.main.transform.position.x < 0.0f)
+		//Debug.Log("进入协程");
+		//距离主角超过1前
+		while(Mathf.Abs(Camera.main.transform.position.x - Hero.r.transform.position.x+ Camera.main.transform.position.y - Hero.r.transform.position.y)> 1)
 		{
 			Camera.main.transform.position = 
 				Vector3.MoveTowards(
 					Camera.main.transform.position, 
 					new Vector3(Hero.r.transform.position.x, Hero.r.transform.position.y, -10), 
-					8 * Time.deltaTime);
+					
+			(transformedToGameView ?100:500) * Time.deltaTime);
 			yield return null;
 		}
 
 
-		yield return new WaitForSeconds(0.3f);
+		//yield return new WaitForSeconds(0.3f);
 
 		//放大视野
-		while(Camera.main.orthographicSize < gameOrthoSize)
+		while(Mathf.Abs(Camera.main.orthographicSize - gameOrthoSize)>0.1)
 		{
 			Camera.main.orthographicSize = Mathf.MoveTowards(
 				Camera.main.orthographicSize, 
@@ -113,8 +116,103 @@ public class CameraController : MonoBehaviour
 
 			yield return null;
 		}
-		Game.g.StartGame();
-		//案例在这里写得不太好，有空应该帮他改一下。camera属于视图层，game属于控制层，这里的逻辑应该放在game里面。
+
+		//等待五秒
+		yield return new WaitForSeconds(0.50f);
+		
+		transformedToGameView = true;
+		
+		callback();
 		
 	}
+
+	public void moveTo (Vector4 pos,float speed =25, MyDelegateVoid callback = null)
+	{
+		StartCoroutine(moveToEnumerator(pos,speed,callback));
+	
+	}
+
+		IEnumerator moveToEnumerator (Vector4 pos,float speed =25, MyDelegateVoid callback = null)
+	{
+		//镜头移动到目标
+		while(Mathf.Abs(Camera.main.transform.position.x - pos.x+ Camera.main.transform.position.y - pos.y)> 0.1)
+		{
+			Camera.main.transform.position = 
+				Vector3.MoveTowards(
+					Camera.main.transform.position, 
+					new Vector3(pos.x, pos.y, -10), 
+					speed * Time.deltaTime);
+			yield return null;
+		}
+
+		callback();
+		
+	}
+
+	public void changeGraphicSize (float target,float speed =20, MyDelegateVoid callbacK = null)
+	{
+		StartCoroutine(changeGraphicSizeEnumerator(target,speed,callbacK));
+	
+	}
+
+	IEnumerator changeGraphicSizeEnumerator (float target,float speed =20, MyDelegateVoid callback = null)
+	{
+
+		//放大视野，当绝对值大于0.1时
+		while(Mathf.Abs(Camera.main.orthographicSize - target)> 0.1f)
+		{
+			Camera.main.orthographicSize = Mathf.MoveTowards(
+				Camera.main.orthographicSize, 
+				target, speed * Time.deltaTime);
+
+			yield return null;
+		}
+
+		
+		callback();
+		
+	}
+
+
+
+	
+	IEnumerator waitThenDoEnumerator ( float time,MyDelegateVoid callback = null)
+	{	Debug.Log("waitThenDo");
+		yield return new WaitForSeconds(time);
+		Debug.Log("waitFinished");
+		callback();
+		
+	}
+	public void waitThenDo (float time, MyDelegateVoid callback = null)
+	{
+		
+		StartCoroutine(waitThenDoEnumerator(time,callback));
+	
+	}
+
+	public void closeUpShot(Vector3 pos, float speed =20f, float shotTime=1f,MyDelegateVoid callbacK = null){
+
+		//镜头移动到目标
+		moveTo(pos,speed,
+		 () =>{
+			//放大视野
+			changeGraphicSize(15f,20f,() =>{
+				//等待特写时间
+				waitThenDo(shotTime,() =>{
+
+					TransitionToGameView(callbacK); 
+				
+				});
+				
+
+
+			});
+			
+			});
+		
+	}
+
+	
+	
+
 }

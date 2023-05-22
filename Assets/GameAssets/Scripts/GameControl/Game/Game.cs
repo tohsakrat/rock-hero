@@ -11,9 +11,8 @@ public class Game : MonoBehaviour
 
 	public GameObject planetShield;
 	public GameObject turret;
+	public GameObject Boss1;
 	
-	public float BeatsPerMinute;//每分钟拍数
-	public float attackRate;//攻击速度，每拍打几下
 	public static Game g;
 
 	public bool isBoss;
@@ -24,13 +23,17 @@ public class Game : MonoBehaviour
 		
 		g = this;
 		//Setting stuff up so the camera is set to menu view.
-		CameraController.c.SetMenuView();
+		//CameraController.c.SetMenuView();
+	}
+	void Start()
+	{
 		UI.ui.SetMenuUI();
 		UI.ui.gameUI.SetActive(false);
 
-		//Getting the highscore.
+	//Getting the highscore.
 		gameTimeHighscore = PlayerPrefs.GetFloat("Highscore");
-	}
+	} 
+
 
 	void Update ()
 	{
@@ -39,19 +42,33 @@ public class Game : MonoBehaviour
 			gameTime += Time.deltaTime;
 
 		//游戏生存时间超过一分钟，进入boss战，对所有场上敌人造成9999伤害清场
-		/*
-		if(gameTime >  30 && !isBoss)
+		
+		if(gameTime >  120 && !isBoss)
 		{	
 			g.gameActive = false;
+
 			EnemySpawner.s.maxEnemies=0;
 			isBoss = true;
+
 			//对所有场上敌人造成9999伤害清场
 			foreach(Enemy enemy in Regedit.r.EnemiesParent.GetComponentsInChildren<Enemy>())
 			{
 				enemy.TakeDamage(9999);
 			}
 			AudioManager.am.PlayBoss();
-		}*/
+			//boss出生
+			Boss1 = Instantiate(Boss1, new Vector3(0, 0, 0), Quaternion.identity, Regedit.r.EnemiesParent.transform);
+			
+			//镜头移动到boss
+			//(Vector4 pos,float speed =25, MyDelegateVoid callbacK = null)
+			CameraController.c.closeUpShot(new Vector4(0, 0, 0, 0), 25,5,()=>{g.gameActive = true;});
+
+
+
+		}
+
+
+
 
 
 		
@@ -69,7 +86,6 @@ public class Game : MonoBehaviour
 			enemies[i].SetSiblingIndex(i);
 		}
 
-
 		
 	}
 
@@ -80,7 +96,7 @@ public class Game : MonoBehaviour
 		gameTime = 0.0f;
 		Hero.r.canMove = true;
 		UI.ui.SetGameUI();
-		Camera.main.GetComponent<CameraController>().TransitionToGameView();
+		//Camera.main.GetComponent<CameraController>().TransitionToGameView(Game.g.StartGame);
 		
 		AudioManager.am.PlayNormal ();
 	}
@@ -159,6 +175,8 @@ public class Game : MonoBehaviour
 		yield return new WaitForSeconds(8.0f);
 		planetShield.SetActive(false);
 	}
+
+	
 
 	//Enables the turret object.
 	public void SetTurret ()

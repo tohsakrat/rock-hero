@@ -53,7 +53,7 @@ public class UI : MonoBehaviour
 	//On the menu screen, when the "Play" button gets pressed.
 	public void OnPlayButton ()
 	{
-		CameraController.c.TransitionToGameView();
+		CameraController.c.TransitionToGameView(Game.g.StartGame);
 		menuUI.SetActive(false);
 		settingUI.SetActive(false);
 		CreditsUI.SetActive(false);

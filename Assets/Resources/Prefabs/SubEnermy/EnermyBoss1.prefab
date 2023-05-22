@@ -121,7 +121,7 @@ MonoBehaviour:
   dropRate: 0.5
   deathParticleEffect: {fileID: 1039865511874772, guid: 9d838c99f2af4294c9a60baeecacc759,
     type: 3}
-  bodyTexture: {fileID: 0}
+  bodyTexture: {fileID: 3910977739869303596}
   angleOffset: 0
   colliderTriger: {fileID: 2179808052832793859}
   verse: 0

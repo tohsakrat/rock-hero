@@ -32,7 +32,7 @@ public class AudioManager : MonoBehaviour
 	{ 
 		//audiosource的bpm随着主角bpm变化
 		if(!Game.g.gameActive){return;}
-		if(Hero.r==null){return;}
+		if(Hero.r.currentStatus==null){return;}//避免一个报错
 		audioSource.pitch = Hero.r.currentStatus.BeatsPerMinute/Hero.r.currentStatus.BeatsPerMinute;
 		audioSource2.pitch = Hero.r.currentStatus.BeatsPerMinute/Hero.r.currentStatus.BeatsPerMinute;
 	}

@@ -296,7 +296,7 @@ public class Hero : MonoBehaviour
 
 		if (Input.GetMouseButtonDown(0)){
 			int i;
-			Debug.Log("判定分数");
+			//Debug.Log("判定分数");
 			if(timer<60f/BeatsPerMinute/2){
 				i=playingSkillID;
 
@@ -304,7 +304,7 @@ public class Hero : MonoBehaviour
 				i=playingSkillID+1;
 				
 			}
-
+			if(i>nowGrades.Count-1)i=0;
 			if(nowGrades[i]!=grade.noGrade)return;//如果已经判定过了，就不要再判定了
 
 			if(timer<60f/BeatsPerMinute/10 || timer>60f/BeatsPerMinute/10*9){
@@ -319,7 +319,7 @@ public class Hero : MonoBehaviour
 				nowGrades[i]=grade.miss;
 			}
 			
-			Debug.Log(nowGrades[i]);
+			//Debug.Log(nowGrades[i]);
 
 			}
 
