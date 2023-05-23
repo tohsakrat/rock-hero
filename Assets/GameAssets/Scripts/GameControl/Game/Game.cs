@@ -61,7 +61,7 @@ public class Game : MonoBehaviour
 			
 			//镜头移动到boss
 			//(Vector4 pos,float speed =25, MyDelegateVoid callbacK = null)
-			CameraController.c.closeUpShot(new Vector4(0, 0, 0, 0), 25,5,()=>{g.gameActive = true;});
+			CameraController.c.closeUpShot(new Vector4(0, 0, 0, 0), 25,2,()=>{g.gameActive = true;});
 
 
 
@@ -113,7 +113,20 @@ public class Game : MonoBehaviour
 
 			//Disabling the planet and rocket sprites.
 			//Hero.r.rocketSprite.gameObject.SetActive(false);
-			Hero.r.gameObject.SetActive(false);
+			//如果主角生命大于0
+			if(Hero.r.health > 0)
+			{
+				//如果游戏时间大于最高纪录
+			//朝着主角放大镜头
+				CameraController.c.closeUpShot(new Vector4(Hero.r.transform.position.x, Hero.r.transform.position.y, 0, 0), 25,5,()=>{g.gameActive = true;});
+					AudioManager.am.PlayWin();
+				
+			}else{
+				Hero.r.gameObject.SetActive(false);
+
+					AudioManager.am.PlayLose();
+			}
+			
 		}
 	}
 

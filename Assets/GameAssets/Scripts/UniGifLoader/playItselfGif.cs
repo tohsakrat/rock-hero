@@ -6,11 +6,12 @@ public class playItselfGif : MonoBehaviour
 {
     // Start is called before the first frame update
     public string gifUrlInput;
-
+    public bool autoPlay=true;
     private SpriteRenderer m_spriteRenderer;
     private bool m_mutex;
     private RawImage m_rawImage;
     private UniGifImage gifImage;
+    private UniGifImage next;
 
 
     void Start()
@@ -29,18 +30,17 @@ public class playItselfGif : MonoBehaviour
         m_mutex = true;
        m_rawImage.color= new Color(0f, 0f, 0f, 0f);
 
-        StartCoroutine(ViewGifCoroutine());
+        gifImage.SetGifFromUrl(gifUrlInput,autoPlay);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void PlayNext(){
+        if(next!=null){
+            gifImage=next;
+            next=null;
+            gifImage.SetGifFromUrl(gifUrlInput,autoPlay);
+        }
     }
+    
 
-     private IEnumerator ViewGifCoroutine()
-    {  // Debug.Log(gifUrlInput);
-        yield return StartCoroutine(gifImage.SetGifFromUrlCoroutine(gifUrlInput));
-        m_mutex = false;
-    }
+
 }

@@ -8,6 +8,9 @@ public class AudioManager : MonoBehaviour
 	public AudioClip bgmManual;
 	public AudioClip bgmNormal1;
 	public AudioClip bgmNormal2;
+	
+	public AudioClip win;
+	public AudioClip lose;
 	public AudioClip bgmBattle;
 	public AudioClip bgmBoss;
 	public AudioClip shoot1;
@@ -19,6 +22,8 @@ public class AudioManager : MonoBehaviour
 	public AudioClip buttonHover;
 	public AudioClip buttonClick;
 	public AudioClip beat;
+	
+	public float bgmBPM;
 	
 	//Audio Source
 	public AudioSource audioSource;
@@ -33,9 +38,13 @@ public class AudioManager : MonoBehaviour
 		//audiosource的bpm随着主角bpm变化
 		if(!Game.g.gameActive){return;}
 		if(Hero.r.currentStatus==null){return;}//避免一个报错
-		audioSource.pitch = Hero.r.currentStatus.BeatsPerMinute/Hero.r.currentStatus.BeatsPerMinute;
+		audioSource.pitch = Hero.r.currentStatus.BeatsPerMinute / Hero.r.currentStatus.BeatsPerMinute;
 		audioSource2.pitch = Hero.r.currentStatus.BeatsPerMinute/Hero.r.currentStatus.BeatsPerMinute;
 	}
+
+
+	//先放大再缩小视野
+
 
 
 	public void Play (AudioClip As)
@@ -64,12 +73,34 @@ public class AudioManager : MonoBehaviour
 		audioSource.PlayOneShot(bgmManual);
 		
 	}
+
+	public void PlayWin ()
+	{
+
+		//随机播放一首非战斗bgm
+		audioSource.Stop();
+		audioSource.PlayOneShot(win);
+		
+	}
+
+	
+	public void PlayLose ()
+	{
+
+		//随机播放一首非战斗bgm
+		audioSource.Stop();
+		audioSource.PlayOneShot(lose);
+		
+	}
+	
 	public void PlayBoss ()
 	{
+		bgmBPM=120;
 		audioSource.Stop();
 		audioSource.PlayOneShot( bgmBoss);
 		//音量增加
 		audioSource.volume = 0.5f;
+		audioSource2.volume = 0.1f;
 		
 	}
 	//Plays the "getPickup" sound effect, from the audio source.
@@ -77,6 +108,7 @@ public class AudioManager : MonoBehaviour
 	{
 		//先停止正在播放的bgm 再换成normal音乐
 		audioSource.Stop();
+		bgmBPM=72;
 		audioSource.PlayOneShot(bgmNormal1);
 		Debug.Log("play normal");
 		

@@ -51,10 +51,13 @@ public class Hero : MonoBehaviour
 	public status buffedStatus;//Buff和Debuff叠加之和
 	public status currentStatus;//实时状态
 
+
 	//控制变量
 	
 	public static Hero r;
 	public bool canMove;
+
+	
 	[Header("临时变量")]
 	public bool canHoldFire; //是否可以射击，用来阻塞技能
    	public float timer = 0;//计时器
@@ -205,7 +208,7 @@ public class Hero : MonoBehaviour
 			if(timer>60f/BeatsPerMinute){
 				timer=0;
 				beatsLeft--;
-				AudioManager.am.Beat();
+				if(!Game.g.isBoss)AudioManager.am.Beat();
 				if(beatsLeft<=0)Shoot();
 			}
 			judgeG();
@@ -337,6 +340,7 @@ public class Hero : MonoBehaviour
 		foreach(Pickup p in items){
 			buffedStatus=buffedStatus+p.item();
 		}
+		baseStatus.BeatsPerMinute=AudioManager.am.bgmBPM;
 		currentStatus=baseStatus+customPoints+buffedStatus;
 		maxHealth=currentStatus.maxHealth;
 		attack=currentStatus.attack;

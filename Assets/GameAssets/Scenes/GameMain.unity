@@ -1176,8 +1176,7 @@ MonoBehaviour:
   Debuging: 1
   planetShield: {fileID: 0}
   turret: {fileID: 1835627214}
-  BeatsPerMinute: 60
-  attackRate: 10
+  Boss1: {fileID: 1129669299386006, guid: fa3b23b120528fc419e293eb65be7c13, type: 3}
   isBoss: 0
 --- !u!114 &637221775
 MonoBehaviour:
@@ -3306,6 +3305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gifUrlInput: "\u6052\u661F.gif"
+  autoPlay: 1
 --- !u!114 &1505283972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3327,6 +3327,8 @@ MonoBehaviour:
   path: 
   m_gifTextureListLength: 0
   m_gifTextureIndex: 0
+  m_nowLoopCount: 0
+  loopCount: 0
 --- !u!114 &1505283973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3940,6 +3942,8 @@ MonoBehaviour:
   bgmManual: {fileID: 8300000, guid: 7148b98fac6de264dbd425816b5a6657, type: 3}
   bgmNormal1: {fileID: 8300000, guid: d344e0498f9d96249888ba154b84882e, type: 3}
   bgmNormal2: {fileID: 8300000, guid: 7322eb3233fa128489cffb78b59e7ff1, type: 3}
+  win: {fileID: 8300000, guid: c218f29d9dda48349bb1fd31c0660983, type: 3}
+  lose: {fileID: 8300000, guid: 93b871720f3539e4d9a9898dd9c3cac9, type: 3}
   bgmBattle: {fileID: 8300000, guid: ac8672e0d49dabe408f341465b1bcc5a, type: 3}
   bgmBoss: {fileID: 8300000, guid: 254f108a5b6315e46a1a3ad9c85f5138, type: 3}
   shoot1: {fileID: 8300000, guid: 30f8cd58bb88a5a44862a2bb4ca6af64, type: 3}
@@ -3951,6 +3955,7 @@ MonoBehaviour:
   buttonHover: {fileID: 8300000, guid: afe7929fe114a0a4f98dbed325a18a44, type: 3}
   buttonClick: {fileID: 8300000, guid: ae006432f925081459dbf11949abec9d, type: 3}
   beat: {fileID: 8300000, guid: 0c0fc3a72da3ad24a91a39a51ca12092, type: 3}
+  bgmBPM: 0
   audioSource: {fileID: 1728226194}
   audioSource2: {fileID: 1728226195}
 --- !u!82 &1728226194
@@ -5409,7 +5414,7 @@ PrefabInstance:
     - target: {fileID: 5955571050733797486, guid: 3aa975585b9048449b4e224aac21b705,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 18.999939
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 5955571051994494992, guid: 3aa975585b9048449b4e224aac21b705,
         type: 3}

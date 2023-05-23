@@ -9,7 +9,34 @@ public class EnemyBoss1 : Enemy
     
     public GameObject focusingSight;//瞄准准星
     
-    public GameObject readyTexture;//准备发射时的贴图
+
+    public GameObject onStageTexture;//入场时的贴图
+    public GameObject idleTexture;//待机时的贴图
+
+    public GameObject rushTexture1;
+    public GameObject rushTexture2;
+    public GameObject rushTexture3;
+
+    
+    public GameObject shootingTexture1;
+    public GameObject shootingTexture2;
+    public GameObject shootingTexture3;
+
+
+	public enum status{
+		//枚举属性，列出所有可能状态
+        onStage,
+        idle,
+        rushing1,
+        rushing2,
+        rushing3,
+        shooting1,
+        shooting2,
+        shooting3,
+		
+	}
+    public status nowStatus;
+
     public GameObject normalTexture;//正常时的贴图
     
 
@@ -67,13 +94,20 @@ public class EnemyBoss1 : Enemy
 
     }
 
+      override public void Die(){
+        base.Die();
+        //结束游戏
+        Game.g.EndGame();
+      }
+
+
     public IEnumerator shootEnumerator(){
 
         //瞄准阶段
         canShoot=false;
         isFocusing=true;
 
-        readyTexture.SetActive(true);
+        //readyTexture.SetActive(true);
         
 
         GameObject missile = Instantiate(missileSample, missileSample.transform.position, missileSample.transform.rotation,missileSample.transform.parent.transform);
@@ -90,7 +124,7 @@ public class EnemyBoss1 : Enemy
         
         isFocusing=false;
         isShooting=true;
-         readyTexture.SetActive(false);
+        //readyTexture.SetActive(false);
         normalTexture.SetActive(true);
         focusingMe.GetComponent<FocusingSight>().stunned=true;//准星不再移动
         EnemyTomato fryTomato = missile.GetComponent<EnemyTomato>();//获取导弹的脚本
@@ -112,6 +146,28 @@ public class EnemyBoss1 : Enemy
         canShoot=true;
 
     }
+
+    public hideAll(){
+        //隐藏所有贴图
+       
+            onStageTexture.SetActive(false);
+            idleTexture.SetActive(false);
+            rushTexture1.SetActive(false);
+            rushTexture2.SetActive(false);
+            rushTexture3.SetActive(false);
+            shootingTexture1.SetActive(false);
+            shootingTexture2.SetActive(false);
+            shootingTexture3.SetActive(false);
+            normalTexture.SetActive(false);
+    }
+    
+
+    public statusOnStage(){
+        hideAll();
+        onStageTexture.SetActive(true);
+        onStageTexture.GetComponent<UniGifImage>().Play();
+    }
+   
 
 
    

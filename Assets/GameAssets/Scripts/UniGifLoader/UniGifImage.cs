@@ -32,6 +32,9 @@ public class UniGifImage : MonoBehaviour
         Pause,
     }
 
+	public delegate void MyDelegateVoid();
+    public MyDelegateVoid OnGifEnd;
+
     //修改原包，读取指定地址
     public string gifResourcePath;
 
@@ -72,9 +75,9 @@ public class UniGifImage : MonoBehaviour
 
     [SerializeField]
     public int m_gifTextureIndex;
-    
+    //public bool autoResume;
     // loop counter
-    private int m_nowLoopCount;
+    public int m_nowLoopCount;
 
     /// <summary>
     /// Now state
@@ -88,11 +91,9 @@ public class UniGifImage : MonoBehaviour
     /// <summary>
     /// Animation loop count (0 is infinite)
     /// </summary>
-    public int loopCount
-    {
-        get;
-        private set;
-    }
+     [SerializeField]
+    public int loopCount;
+  
 
     /// <summary>
     /// Texture width (px)
@@ -163,12 +164,13 @@ public class UniGifImage : MonoBehaviour
                 if (m_gifTextureIndex >= m_gifTextureList.Count)
                 {
                     m_gifTextureIndex = 0;
+                    m_nowLoopCount++;
 
                     if (loopCount > 0)
                     {
-                        m_nowLoopCount++;
                         if (m_nowLoopCount >= loopCount)
                         {
+                            OnGifEnd();
                             Stop();
                             return;
                         }
