@@ -19,6 +19,9 @@ public class UI : MonoBehaviour
 	public Text timeElapsed;
 	public Image HealthBar;
 
+	[Header("Skill")]
+	public Image[] SkillList;
+
 	//Game Over UI
 	public Text goDefendTime;
 	public Text goHighscoreTime;
@@ -38,7 +41,9 @@ public class UI : MonoBehaviour
 	{
 		if(Game.g.gameActive)
 		{
+			GetSkillList();
 			SetTimeElapsed();
+			RefreshHealthBar();
 		}
 	}
 	public void onPause(){
@@ -218,5 +223,24 @@ public class UI : MonoBehaviour
 			secs = "0" + secs;
 
 		return mins + ":" + secs;
+	}
+
+	void RefreshHealthBar()
+    {
+		float PlayerHealthBar = Hero.r.health;
+		float MaxHealth = Hero.r.maxHealth;
+
+		float HealthRatio = PlayerHealthBar / MaxHealth;
+		HealthBar.fillAmount = HealthRatio;
+	}
+
+	void GetSkillList()
+    {
+		for(int i = 0; i < Hero.r.Skills.Count; i++)
+        {
+			SkillList[i].sprite = Hero.r.Skills[i].icon;
+			//Debug.Log("技能列表");
+			//Debug.Log(Hero.r.Skills.Count);
+		}
 	}
 }

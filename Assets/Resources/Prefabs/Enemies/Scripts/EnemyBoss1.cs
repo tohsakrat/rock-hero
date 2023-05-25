@@ -147,7 +147,7 @@ public class EnemyBoss1 : Enemy
 
     }
 
-    public hideAll(){
+    public void hideAll(){
         //隐藏所有贴图
        
             onStageTexture.SetActive(false);
@@ -162,7 +162,7 @@ public class EnemyBoss1 : Enemy
     }
     
 
-    public statusOnStage(){
+    public void statusOnStage(){
         hideAll();
         onStageTexture.SetActive(true);
         onStageTexture.GetComponent<UniGifImage>().Play();
