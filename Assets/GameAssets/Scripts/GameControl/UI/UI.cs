@@ -236,11 +236,11 @@ public class UI : MonoBehaviour
 
 	void GetSkillList()
     {
-		for(int i = 0; i < Hero.r.Skills.Count; i++)
+		for(int i = 0; i < 8; i++)
         {
-			SkillList[i].sprite = Hero.r.Skills[i].icon;
-			//Debug.Log("技能列表");
-			//Debug.Log(Hero.r.Skills.Count);
+			SkillList[i].sprite = Hero.r.playingSkills[i].icon;
+			Debug.Log("技能音轨数量");
+			Debug.Log(Hero.r.playingSkills.Count);
 		}
 	}
 }
